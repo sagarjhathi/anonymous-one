@@ -32,9 +32,6 @@ public class Sample {
 	public static void main(String args[]) throws InterruptedException, IOException {
 
 				
-	
-
-	
 
 		        String inputUrl = "https://www.youtube.com/watch?v=bm0OyhwFDuY&list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5";
 
@@ -42,12 +39,12 @@ public class Sample {
 
 		        System.out.println("\n===== FINAL VIDEO URLS =====");
 		        int c=0;
+		        
 		        for (String url : videoUrls) {
 		            System.out.println(url);
-		            c++;
-		            
-		            
+		            c++;   
 		        }
+		        
 		        System.out.println(c+"Count of url");
 		        
 		        
@@ -86,47 +83,7 @@ public class Sample {
 				       }
 				       d.quit();
 		        }
-		        
-//		        WebDriver d= new ChromeDriver();
-//		        d.get("https://notegpt.io/youtube-transcript-generator");
-//		        d.manage().window().maximize();
-//		        
-//		        d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).click();
-//		        
-//		        Thread.sleep(2000);
-//		        String url="https://www.youtube.com/watch?v=bm0OyhwFDuY&list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5";
-//
-//		        d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).sendKeys(url);
-//
-//		        if(d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).getText().contains("Paste the YouTube video link, for example")) {
-//		        	System.out.println("In the if");
-//		        	
-//			        d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).sendKeys(url);
-//		        }
-////		        for(int i=0;i<url.length();i++) {
-////			        d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).sendKeys(String.valueOf(url.charAt(i)));
-////			        	Thread.sleep(200);
-////			        	
-////		        }
-//
-//		        //d.findElement(By.xpath("//div[@data-slot='root']//input[@placeholder='Paste the YouTube video link, for example: https://www.youtube.com/watch?v=example']")).sendKeys("https://www.youtube.com/watch?v=bm0OyhwFDuY&list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5");
-//		        
-//		        Thread.sleep(4000);
-//		        
-//		        d.findElement(By.xpath("//button[@type='submit']")).click();
-//		        Thread.sleep(5000);
-//		        
-//		       List<WebElement> ele= d.findElements(By.xpath("//div[contains(@id,'youTube_transcript_item')]//div[@class='overflow-hidden text-ellipsis leading-relaxed line-clamp-4 max-h-[6.8em]']"));
-//		       
-//		       for(int i=0;i<ele.size();i++) {
-//		    	   
-//		    	   System.out.println(ele.get(i).getText());
-//		    	   System.out.println();
-//		    	   
-//		       }
-		        
-		        
-		       
+		       		       
 		       
 		    }
 

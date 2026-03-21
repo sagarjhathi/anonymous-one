@@ -14,6 +14,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,9 +35,9 @@ public class Trial {
 		    // 🔥 Step 1: Get all video URLs
 		    List<String> videoUrls = processUrl(inputUrl);
 
-//		    System.out.println("Total videos: " + videoUrls.size());
-//
-//		    // 🔥 Step 2: Split list into 2 parts
+		    System.out.println("Total videos: " + videoUrls.size());
+
+		    // 🔥 Step 2: Split list into 2 parts
 //		    int mid = videoUrls.size() / 2;
 //
 //		    List<String> list1 = videoUrls.subList(0, mid);
@@ -55,36 +57,40 @@ public class Trial {
 //		    // 🔥 Step 6: Wait for both to finish
 //		    t1.join();
 //		    t2.join();
-//
-//		    // 🔥 Step 7: End timer
-//		    long end = System.currentTimeMillis();
-//
-//		    System.out.println("\nTotal Time: " + (end - start) / 1000.0 + " seconds");
-//		
-		
-		
-//		for (String url : videoUrls) {
-//
-//		    String videoId = url.split("v=")[1].split("&")[0];
-//
-//		    String html = getTranscriptPage(videoId);
-//
-//		    System.out.println("Fetched for: " + videoId);
-//
-//		    // Later → parse transcript from HTML
-//		}
 		    
 		    
-		    for (String url : videoUrls) {
+		    int size = videoUrls.size();
 
-		        String videoId = url.split("v=")[1].split("&")[0];
+		 // divide into 3 parts
+		 int part = size / 3;
 
-		        String html = getTranscriptPage(videoId);
+		 List<String> list1 = videoUrls.subList(0, part);
+		 List<String> list2 = videoUrls.subList(part, 2 * part);
+		 List<String> list3 = videoUrls.subList(2 * part, size);
 
-		        System.out.println("\n===== TRANSCRIPT for " + videoId + " =====");
+		 // 🔥 Create threads
+		 Thread t1 = new Thread(() -> runProcess(list1));
+		 Thread t2 = new Thread(() -> runProcess(list2));
+		 Thread t3 = new Thread(() -> runProcess(list3));
 
-		        printTranscript(html);
-		    }
+	//	 🔥 Step 4: Start timer
+		    long start = System.currentTimeMillis();
+		 // 🔥 Start threads
+		 t1.start();
+		 t2.start();
+		 t3.start();
+
+		 // 🔥 Wait for all to finish
+		 t1.join();
+		 t2.join();
+		 t3.join();
+
+		    // 🔥 Step 7: End timer
+		    long end = System.currentTimeMillis();
+
+		    System.out.println("\nTotal Time: " + (end - start) / 1000.0 + " seconds");
+    		    
+		  
 	}
 	
 	
@@ -106,9 +112,27 @@ public class Trial {
 	            input.sendKeys(e);
 
 	            d.findElement(By.xpath("//button[@type='submit']")).click();
-
+	            
 	            Thread.sleep(5000);
-
+	            
+	        try {
+	        //	String path=System.getProperty("user.dir")+"/Sagar/Transcripts";
+	        	String path = Paths.get(System.getProperty("user.dir"), "Sagar", "Transcripts").toString();
+	        	
+	        	
+	            List<WebElement> ele= d.findElements(By.xpath("//div[contains(@id,'youTube_transcript_item')]//div[@class='overflow-hidden text-ellipsis leading-relaxed line-clamp-4 max-h-[6.8em]']"));
+			      StringBuilder sb= new StringBuilder();
+			      
+			       for(int j=0;j<ele.size();j++) {
+			    	   
+			    	   System.out.println(ele.get(j).getText());
+			    	   System.out.println();
+			    	   
+			       }
+	        }catch(Exception ee) {
+	        	System.out.println("Could not get the data");
+	        	}
+	            	
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
@@ -120,6 +144,18 @@ public class Trial {
 	
 	
 	
+	public static void saveTranscript(String videoId, String transcript) {
+	    try {
+	        String fileName = "transcript_" + videoId + ".txt";
+
+	        Files.write(Paths.get(fileName), transcript.getBytes());
+
+	        System.out.println("Saved: " + fileName);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	
 
@@ -239,5 +275,42 @@ public static void printTranscript(String html) {
     for (Element e : elements) {
         System.out.println(e.text());
     }
+}
+
+
+public static String getTranscript(WebDriver driver, String videoId) throws InterruptedException {
+
+    String url = "https://notegpt.io/detail?id=" + videoId + "&type=1";
+
+    driver.get(url);
+
+    // wait for JS to load transcript
+    Thread.sleep(4000);
+
+    List<WebElement> elements = driver.findElements(
+            By.xpath("//div[contains(@id,'youTube_transcript_item')]")
+    );
+
+    StringBuilder transcript = new StringBuilder();
+
+    for (WebElement e : elements) {
+        transcript.append(e.getText()).append(" ");
+    }
+
+    return transcript.toString();
+}
+
+
+public static String getVideoId(String url) {
+
+    if (url.contains("v=")) {
+        return url.split("v=")[1].split("&")[0];
+    }
+
+    if (url.contains("youtu.be/")) {
+        return url.split("youtu.be/")[1].split("\\?")[0];
+    }
+
+    return "";
 }
 }
