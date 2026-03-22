@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
@@ -21,3 +21,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'    
+
+      - name: Run Tests
+        run: mvn clean test
