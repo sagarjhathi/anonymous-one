@@ -17,7 +17,7 @@ public class DManager{
 		ChromeOptions options =new ChromeOptions();
 		
 		options.addArguments("--start-maximized");
-		options.addArguments("--headless=new");
+		//options.addArguments("--headless=new");
 		options.addArguments("--no-sandbox");
 		options.addArguments("--disable-dev-shm-usage");
 		WebDriver driverInstance = new ChromeDriver(options);

@@ -21,10 +21,6 @@ public class AllTests extends BaseTest {
 		
 		
 		login.openLoginPage();
-		
-		//Thread.sleep(9000);
-		SafeActions safeAct= new SafeActions();
-	//safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -34,8 +30,6 @@ public class AllTests extends BaseTest {
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
-	//	Assert.assertTrue(false);
-		
 		
 	}
 	
@@ -44,13 +38,11 @@ public class AllTests extends BaseTest {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
 		LoginPage login=new LoginPage();
-	    //driver.manage().window().maximize();
+	    
 		
 		login.openLoginPage();
 		driver.manage().window().maximize();
 		SafeActions safeAct= new SafeActions();
-	    //safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
-		//Thread.sleep(9000);
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -60,11 +52,9 @@ public class AllTests extends BaseTest {
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
-	//	Thread.sleep(3000);
-		
+	
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
-	//	Thread.sleep(2000);
 		
 	}
 	
@@ -74,15 +64,9 @@ public class AllTests extends BaseTest {
 	public void verifyLoginTest1() throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
-		LoginPage login=new LoginPage();
-	//	driver.manage().window().maximize();
-		
-		
+		LoginPage login=new LoginPage();		
 		login.openLoginPage();
 		
-		//Thread.sleep(9000);
-		SafeActions safeAct= new SafeActions();
-	//	safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -91,9 +75,7 @@ public class AllTests extends BaseTest {
 		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
-		login.clickingSubmitLoginButton();
-	//	Assert.assertTrue(false);
-		
+		login.clickingSubmitLoginButton();		
 		
 	}
 	
@@ -102,13 +84,11 @@ public class AllTests extends BaseTest {
 		
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		LoginPage login=new LoginPage();
-	//	driver.manage().window().maximize();
+
 		
 		login.openLoginPage();
 		driver.manage().window().maximize();
 		SafeActions safeAct= new SafeActions();
-	//	safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
-		//Thread.sleep(9000);
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -117,12 +97,9 @@ public class AllTests extends BaseTest {
 		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
-		login.clickingSubmitLoginButton();
-	//	Thread.sleep(3000);
-		
+		login.clickingSubmitLoginButton();		
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
-	//	Thread.sleep(2000);
 		
 	}
 	
@@ -133,14 +110,8 @@ public class AllTests extends BaseTest {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();
-	//	driver.manage().window().maximize();
-		
-		
 		login.openLoginPage();
 		
-		//Thread.sleep(9000);
-		SafeActions safeAct= new SafeActions();
-	//	safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -150,7 +121,6 @@ public class AllTests extends BaseTest {
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
-	//	Assert.assertTrue(false);
 		
 		
 	}
@@ -159,14 +129,10 @@ public class AllTests extends BaseTest {
 	public void sampleTest2() throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
-		LoginPage login=new LoginPage();
-	//	driver.manage().window().maximize();
-		
+		LoginPage login=new LoginPage();		
 		login.openLoginPage();
 		driver.manage().window().maximize();
 		SafeActions safeAct= new SafeActions();
-	//	safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
-		//Thread.sleep(9000);
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
@@ -176,11 +142,8 @@ public class AllTests extends BaseTest {
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
-	//	Thread.sleep(3000);
-		
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
-	//	Thread.sleep(2000);
 		
 	}
 	
