@@ -1,12 +1,13 @@
-package test.tests;
-import java.time.Duration;
+package test.java.tests;
+import java.time.Duration; 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import main.base.BaseTest;
-import main.pages.LoginPage;
-import main.utils.SafeActions;
+
+import main.java.base.BaseTest;
+import main.java.pages.LoginPage;
+import main.java.utils.SafeActions;
 
 
 public class SampleTest extends BaseTest {
@@ -23,7 +24,7 @@ public class SampleTest extends BaseTest {
 		
 		//Thread.sleep(9000);
 		SafeActions safeAct= new SafeActions();
-	//	safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
+	//safeAct.safeFindElement(By.xpath("//div[@class='orangehrm-login-branding']"));
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		

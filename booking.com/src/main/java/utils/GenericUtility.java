@@ -1,6 +1,6 @@
-package main.utils;
+package main.java.utils;
 
-import main.base.BasePage;
+import main.java.base.BasePage;
 
 public class GenericUtility extends BasePage {
 

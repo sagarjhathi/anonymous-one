@@ -1,4 +1,4 @@
-package main.utils;
+package main.java.utils;
 
 public class Waits {
 

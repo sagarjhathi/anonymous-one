@@ -31,8 +31,8 @@
   
   
   </dependencies>
+  
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -41,6 +41,17 @@
           <release>21</release>
         </configuration>
       </plugin>
+      
+         <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <version>3.2.5</version>
+  <configuration>
+    <suiteXmlFiles>
+      <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+    </suiteXmlFiles>
+  </configuration>
+</plugin>
     </plugins>
   </build>
   

@@ -1,8 +1,8 @@
-package main.base;
+package main.java.base;
 
-import java.sql.DriverManager;
+import java.sql.DriverManager;  
 import java.sql.SQLException;
-import main.driver.*;
+import main.java.driver.DManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -16,8 +16,9 @@ public class BaseTest {
 	@BeforeMethod(alwaysRun=true)
 	public void setup() {
 		
+		
 		DManager.setDriver();
-		driver= main.driver.DManager.getDrivers();
+		driver= DManager.getDrivers();
 	
 		
 	}

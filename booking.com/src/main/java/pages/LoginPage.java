@@ -1,9 +1,9 @@
-package main.pages;
+package main.java.pages;
 
 import org.openqa.selenium.By;
 
-import main.base.BasePage;
-import main.utils.SafeActions;
+import main.java.base.BasePage;
+import main.java.utils.SafeActions;
 
 public class LoginPage extends BasePage {
 

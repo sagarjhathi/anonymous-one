@@ -1,9 +1,9 @@
-package main.base;
+package main.java.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import main.driver.DManager;
+import main.java.driver.DManager;
 
 public class BasePage {
 
