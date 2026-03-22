@@ -1,16 +1,16 @@
-package test.java.tests;
+package tests;
 import java.time.Duration; 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import main.java.base.BaseTest;
-import main.java.pages.LoginPage;
-import main.java.utils.SafeActions;
+import base.BaseTest;
+import pages.LoginPage;
+import utils.SafeActions;
 
 
-public class SampleTest extends BaseTest {
+public class AllTests extends BaseTest {
 
 	@Test
 	public void verifyLoginTest() throws InterruptedException {

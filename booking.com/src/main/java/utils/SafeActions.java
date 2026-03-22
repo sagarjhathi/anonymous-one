@@ -1,6 +1,6 @@
-package main.java.utils;
+package utils;
 
-import java.time.Duration;
+import java.time.Duration; 
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import main.java.base.BasePage;
+import base.BasePage;
 
 public class SafeActions extends BasePage {
 	
@@ -45,5 +45,6 @@ public class SafeActions extends BasePage {
 	
 	
 	
+     
 
 }

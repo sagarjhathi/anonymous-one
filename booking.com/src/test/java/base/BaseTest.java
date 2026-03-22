@@ -1,8 +1,9 @@
-package main.java.base;
+package base;
 
-import java.sql.DriverManager;  
+
+import java.sql.DriverManager;   
 import java.sql.SQLException;
-import main.java.driver.DManager;
+import driver.DManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
