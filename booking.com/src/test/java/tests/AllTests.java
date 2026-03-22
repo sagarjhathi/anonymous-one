@@ -14,7 +14,7 @@ public class AllTests extends BaseTest {
 
 	@Test
 	public void verifyLoginTest() throws InterruptedException {
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();
 		driver.manage().window().maximize();
@@ -41,7 +41,7 @@ public class AllTests extends BaseTest {
 	
 	@Test
 	public void sampleTest() throws InterruptedException {
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
 		LoginPage login=new LoginPage();
 	    //driver.manage().window().maximize();
@@ -72,7 +72,7 @@ public class AllTests extends BaseTest {
 	
 	@Test
 	public void verifyLoginTest1() throws InterruptedException {
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();
 	//	driver.manage().window().maximize();
@@ -100,7 +100,7 @@ public class AllTests extends BaseTest {
 	@Test
 	public void sampleTest1() throws InterruptedException {
 		
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		LoginPage login=new LoginPage();
 	//	driver.manage().window().maximize();
 		
@@ -130,7 +130,7 @@ public class AllTests extends BaseTest {
 	
 	@Test
 	public void verifyLoginTest2() throws InterruptedException {
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();
 	//	driver.manage().window().maximize();
@@ -157,7 +157,7 @@ public class AllTests extends BaseTest {
 	
 	@Test
 	public void sampleTest2() throws InterruptedException {
-		
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
 		LoginPage login=new LoginPage();
 	//	driver.manage().window().maximize();
@@ -186,3 +186,5 @@ public class AllTests extends BaseTest {
 	
 	
 }
+
+
