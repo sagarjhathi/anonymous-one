@@ -8,7 +8,7 @@
     </Console>
 
     <Routing name="RoutingAppender">
-        <Routes pattern="$${ctx:logPath}">
+        <Routes pattern="$${ctx:logFileName}">
             <Route>
                 <File name="FileAppender-${ctx:logPath}"
                        fileName="${ctx:logPath}/${ctx:logFileName}.log">
@@ -21,7 +21,6 @@
 </Appenders>
     
     
-
 
    <Loggers>
     <Root level="info">

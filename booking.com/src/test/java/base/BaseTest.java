@@ -102,9 +102,10 @@ public class BaseTest {
 	        String logFileName = testName + "_" + timestamp;
 
 	        // 🔥 Push into ThreadContext
+	        ThreadContext.put("logFileName", logFileName);
 	        ThreadContext.put("logPath", path);
 	        ThreadContext.put("testName", testName);
-	        ThreadContext.put("logFileName", logFileName);
+	        
 
 	    }
 	    

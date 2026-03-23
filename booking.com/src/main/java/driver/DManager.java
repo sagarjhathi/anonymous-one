@@ -15,13 +15,14 @@ public class DManager{
 	
 	
 	public static WebDriver getDrivers() {
-		log.info("In the get driver method under the driver manager", ThreadContext.get("testName"));
+		//log.info("In the get driver method under the driver manager", ThreadContext.get("testName"));
 		return driver.get();
 	}
 	
 	public static void setDriver() {
+		
 		ChromeOptions options =new ChromeOptions();
-		log.info("In the set driver method under the driver manager", ThreadContext.get("testName"));
+	//	log.info("In the set driver method under the driver manager", ThreadContext.get("testName"));
 		options.addArguments("--start-maximized");
 		//options.addArguments("--headless=new");
 		options.addArguments("--no-sandbox");
@@ -31,7 +32,7 @@ public class DManager{
 	}
 	
 	public static void removeDriver() {
-		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+		//log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 		if(driver!=null) {
 			driver.get().quit();
 		}

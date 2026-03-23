@@ -1,5 +1,9 @@
 package tests;
-import java.time.Duration; 
+import java.time.Duration;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -7,12 +11,16 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import driver.DManager;
 import pages.LoginPage;
 import utils.SafeActions;
 
 
 public class AllTests extends BaseTest {
 
+	
+	private static final Logger log = LogManager.getLogger(AllTests.class);
+	
 	
 	@DataProvider(name = "loginData")
 	public Object[][] getData() {
@@ -23,9 +31,12 @@ public class AllTests extends BaseTest {
 	}
 	
 	
+	
 	@Test(dataProvider = "loginData")
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
 		System.out.println("🔥 CI TEST EXECUTED 🔥   "+str);
 
 		LoginPage login=new LoginPage();
