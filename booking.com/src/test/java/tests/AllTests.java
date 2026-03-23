@@ -3,6 +3,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -12,9 +13,20 @@ import utils.SafeActions;
 
 public class AllTests extends BaseTest {
 
-	@Test
-	public void verifyLoginTest() throws InterruptedException {
-		System.out.println("🔥 CI TEST EXECUTED 🔥");
+	
+	@DataProvider(name = "loginData")
+	public Object[][] getData() {
+	    return new Object[][] {
+	        {"user1"},
+	        {"user2"}
+	    };
+	}
+	
+	
+	@Test(dataProvider = "loginData")
+	public void verifyLoginTest(String str) throws InterruptedException {
+		
+		System.out.println("🔥 CI TEST EXECUTED 🔥   "+str);
 
 		LoginPage login=new LoginPage();
 		driver.manage().window().maximize();
