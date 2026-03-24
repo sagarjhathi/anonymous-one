@@ -78,13 +78,15 @@ public class AllTests extends BaseTest {
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		System.out.println(userName+"    "+password);
 		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
-	
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		
@@ -98,13 +100,15 @@ public class AllTests extends BaseTest {
 
 		LoginPage login=new LoginPage();		
 		login.openLoginPage();
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
 		
 		
 		System.out.println(userName+"    "+password);
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();		
@@ -123,13 +127,16 @@ public class AllTests extends BaseTest {
 		SafeActions safeAct= new SafeActions();
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		
 		System.out.println(userName+"    "+password);
 		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
-		login.clickingSubmitLoginButton();		
+		login.clickingSubmitLoginButton();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		
@@ -146,7 +153,8 @@ public class AllTests extends BaseTest {
 		
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		
 		System.out.println(userName+"    "+password);
 		
@@ -154,7 +162,8 @@ public class AllTests extends BaseTest {
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();
 		
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 	}
 	
 	@Test
@@ -167,7 +176,8 @@ public class AllTests extends BaseTest {
 		SafeActions safeAct= new SafeActions();
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		
 		System.out.println(userName+"    "+password);
 		
@@ -176,7 +186,8 @@ public class AllTests extends BaseTest {
 		login.clickingSubmitLoginButton();
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 	}
 	
 	
