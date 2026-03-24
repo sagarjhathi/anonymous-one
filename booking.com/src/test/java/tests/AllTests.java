@@ -66,7 +66,7 @@ public class AllTests extends BaseTest {
 	}
 	
 	@Test(dataProvider = "loginData")
-	public void sampleTest() throws InterruptedException {
+	public void sampleTest(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
@@ -98,7 +98,7 @@ public class AllTests extends BaseTest {
 	
 	
 	@Test(dataProvider = "loginData")
-	public void verifyLoginTest1() throws InterruptedException {
+	public void verifyLoginTest1(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();		
@@ -121,7 +121,7 @@ public class AllTests extends BaseTest {
 	}
 	
 	@Test(dataProvider = "loginData")
-	public void sampleTest1() throws InterruptedException {
+	public void sampleTest1(String str) throws InterruptedException {
 		
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		LoginPage login=new LoginPage();
@@ -152,7 +152,7 @@ public class AllTests extends BaseTest {
 	
 	
 	@Test(dataProvider = "loginData")
-	public void verifyLoginTest2() throws InterruptedException {
+	public void verifyLoginTest2(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
 		LoginPage login=new LoginPage();
@@ -176,7 +176,7 @@ public class AllTests extends BaseTest {
 	}
 	
 	@Test(dataProvider = "loginData")
-	public void sampleTest2() throws InterruptedException {
+	public void sampleTest2(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
 		LoginPage login=new LoginPage();		
