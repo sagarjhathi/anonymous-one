@@ -14,6 +14,7 @@ import base.BaseTest;
 import driver.DManager;
 import pages.LoginPage;
 import utils.SafeActions;
+import utils.ScreenshotUtil;
 
 
 public class AllTests extends BaseTest {
@@ -35,6 +36,7 @@ public class AllTests extends BaseTest {
 	@Test(dataProvider = "loginData")
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
 		System.out.println("🔥 CI TEST EXECUTED 🔥   "+str);
@@ -46,13 +48,20 @@ public class AllTests extends BaseTest {
 		login.openLoginPage();
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
-		
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
+	
 		
 		System.out.println(userName+"    "+password);
 		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
 		login.clickingSubmitLoginButton();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
+	
 		
 	}
 	
