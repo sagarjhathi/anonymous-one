@@ -25,3 +25,13 @@ jobs:
       - name: Run Tests
         run: mvn clean test
         working-directory: booking.com
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+        name: test-results
+        path: |
+             logs/
+             reports/
+             screenshots/
