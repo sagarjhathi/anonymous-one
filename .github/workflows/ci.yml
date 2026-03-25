@@ -67,7 +67,7 @@ jobs:
            $run = Get-ChildItem gh-pages/reports -Directory
            $runName = $run.Name
 
-           Set-Content gh-pages/index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
+           Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
 
 
 
