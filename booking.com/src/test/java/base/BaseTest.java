@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import driver.DManager;
 import pathManager.PathManager;
+import reporting.ReportManager;
 
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
@@ -20,31 +21,28 @@ import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class BaseTest {
 
 	public WebDriver driver;
-	ExtentReports extent;
 	  
 	  @BeforeSuite(alwaysRun = true)
 	  public void createRunFolder() {
-		  extent = new ExtentReports();
+		  
+		  
 	      String timestamp = LocalDateTime.now()
 	          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
 
 	      String path = System.getProperty("user.dir")
 	              + File.separator + "logs"
 	              + File.separator + "run_" + timestamp;
+      
 	      
-	      String extentPath = System.getProperty("user.dir")
-	              + File.separator + "reports"
-	              + File.separator + "run_" + timestamp+File.separator+"ExtentReport.html";
 	      
-	      ExtentSparkReporter reporter =
-	    		    new ExtentSparkReporter(extentPath + File.separator + "report.html");
-
-	    		extent.attachReporter(reporter);
+	      ReportManager.initReport(path);
+	    		
 
 	      File folder = new File(path);
 	      folder.mkdirs();
@@ -79,24 +77,126 @@ public class BaseTest {
 	      ThreadContext.put("logFileName", testName + "_" + timestamp);
 	      ThreadContext.put("logPath", path);
 	      ThreadContext.put("testName", testName);
-	      ExtentTest test = extent.createTest(testName);
+	      ReportManager.createTest(testName);
+	      
+	      String testFolderPath = PathManager.getTestFolderPath();
+
+//	      String runName = new File(PathManager.getRunFolderPath()).getName();
+//	      
+//	      String screenshotFolderPath =
+//	    	        System.getProperty("user.dir")
+//	    	        + File.separator + "screenshots"
+//	    	        + File.separator + runName
+//	    	        + File.separator + result.getMethod().getMethodName();
+//
+////	      // 🔗 Attach links
+////	      ReportManager.getTest().info(
+////	          "<a href='file:///" + testFolderPath + "'>Logs Folder</a>"
+////	      );
+//
+//	      
+//	      File logFolder = new File(PathManager.getTestFolderPath());
+//
+//	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
+//
+//	      if (logFiles != null) {
+//
+//	          ReportManager.getTest().info("📂 Logs:");
+//
+//	          for (File log : logFiles) {
+//	              ReportManager.getTest().info(
+//	                  "📄 <a href='file:///" + log.getAbsolutePath() + "'>"
+//	                  + log.getName() + "</a>"
+//	              );
+//	          }
+//	      }
+//	      
+////	      ReportManager.getTest().info(
+////	          "<a href='file:///" + screenshotPath + "'>Screenshots Folder</a>"
+////	      );
+//	      
+//	      File screenshotFolder = new File(screenshotFolderPath);
+//
+//	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
+//
+//	      if (images != null && images.length > 0) {
+//
+//	          ReportManager.getTest().info("📸 Screenshots:");
+//
+//	          for (File img : images) {
+//
+//	              ReportManager.getTest().info(
+//	                  MediaEntityBuilder
+//	                      .createScreenCaptureFromPath(img.getAbsolutePath())
+//	                      .build()
+//	              );
+//	          }
+//	      }
 	      
 	  }
 	    
+	  
 
 	  
+	  
 	  @AfterMethod(alwaysRun = true)
-	  public void afterTest() {
+	  public void afterTest(ITestResult result) {
 		  
+	      String runName = new File(PathManager.getRunFolderPath()).getName();
+	      
+	      String screenshotFolderPath =
+	    	        System.getProperty("user.dir")
+	    	        + File.separator + "screenshots"
+	    	        + File.separator + runName
+	    	        + File.separator + result.getMethod().getMethodName();
+
+
+	      
+	      File logFolder = new File(PathManager.getTestFolderPath());
+
+	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
+
+	      if (logFiles != null) {
+
+	          ReportManager.getTest().info("📂 Logs:");
+
+	          for (File log : logFiles) {
+	              ReportManager.getTest().info(
+	                  "📄 <a href='file:///" + log.getAbsolutePath() + "'>"
+	                  + log.getName() + "</a>"
+	              );
+	          }
+	      }
+	      
+	      
+	      File screenshotFolder = new File(screenshotFolderPath);
+
+	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
+
+	      if (images != null && images.length > 0) {
+
+	          ReportManager.getTest().info("📸 Screenshots:");
+
+	          for (File img : images) {
+
+	              ReportManager.getTest().info(
+	                  MediaEntityBuilder
+	                      .createScreenCaptureFromPath(img.getAbsolutePath())
+	                      .build()
+	              );
+	          }
+	      }
 		  
 	      ThreadContext.clearAll();
 	      PathManager.clearTestFolder();
 	      DManager.removeDriver();
+	      
 	  }
+	  
 	  
 	  
 	  @AfterSuite
 	  public void flushReport() {
-		  extent.flush();
+		  ReportManager.flush();
 	  }
 }
