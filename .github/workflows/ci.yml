@@ -62,11 +62,12 @@ jobs:
           Copy-Item -Recurse -Force temp/* gh-pages
 
 # ✅ Create index.html
-      - name: Create index
+      - name: Create index.html
         run: |
-            $run = Get-ChildItem gh-pages/reports | Sort-Object Name | Select-Object -Last 1
-            $runName = $run.Name
-            Set-Content gh-pages/index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/report.html'>"
+           $run = Get-ChildItem gh-pages/reports -Directory
+           $runName = $run.Name
+
+           Set-Content gh-pages/index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
 
 
 
