@@ -61,9 +61,6 @@ public class BaseTest {
 	      DManager.setDriver();
 	      driver = DManager.getDrivers();
 
-	      // 2. Test name
-	   //   String testName = result.getMethod().getMethodName();
-
 	      String baseName = result.getMethod().getMethodName();
 
 	      String params = Arrays.toString(result.getParameters())
@@ -84,10 +81,6 @@ public class BaseTest {
 	      new File(path).mkdirs();
 
 	      PathManager.setTestFolderPath(path);
-
-//	      // 4. Logging context
-//	      String timestamp = LocalDateTime.now()
-//	              .format(DateTimeFormatter.ofPattern("HH-mm-ss"));
 	      
 	      ThreadContext.put("logFileName", testName + "_" + timestamp);
 	      ThreadContext.put("logPath", path);
@@ -96,20 +89,27 @@ public class BaseTest {
 	      
 	      String testFolderPath = PathManager.getTestFolderPath();
 
-//	      String runName = new File(PathManager.getRunFolderPath()).getName();
-//	      
-//	      String screenshotFolderPath =
-//	    	        System.getProperty("user.dir")
-//	    	        + File.separator + "screenshots"
-//	    	        + File.separator + runName
-//	    	        + File.separator + result.getMethod().getMethodName();
-//
-////	      // 🔗 Attach links
-////	      ReportManager.getTest().info(
-////	          "<a href='file:///" + testFolderPath + "'>Logs Folder</a>"
-////	      );
-//
-//	      
+	      
+	  }
+	    
+	  
+	  
+	  
+	  @AfterMethod(alwaysRun = true)
+	  public void afterTest(ITestResult result) {
+		  
+	      String runName = new File(PathManager.getRunFolderPath()).getName();
+	      
+	    
+	      
+	      String screenshotFolderPath =
+	              System.getProperty("user.dir")
+	              + File.separator + "screenshots"
+	              + File.separator + runName
+	              + File.separator + ThreadContext.get("testName");
+
+
+	      
 //	      File logFolder = new File(PathManager.getTestFolderPath());
 //
 //	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
@@ -125,11 +125,31 @@ public class BaseTest {
 //	              );
 //	          }
 //	      }
-//	      
-////	      ReportManager.getTest().info(
-////	          "<a href='file:///" + screenshotPath + "'>Screenshots Folder</a>"
-////	      );
-//	      
+	      
+	      
+	      File logFolder = new File(PathManager.getTestFolderPath());
+
+	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
+
+	      if (logFiles != null) {
+
+	          ReportManager.getTest().info("📂 Logs:");
+
+	          String runNameRelative = new File(PathManager.getRunFolderPath()).getName();
+	          String testName = ThreadContext.get("testName");
+
+	          for (File log : logFiles) {
+
+	              String relativePath =
+	                      "../../logs/" + runNameRelative + "/" + testName + "/" + log.getName();
+
+	              ReportManager.getTest().info(
+	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
+	              );
+	          }
+	      }
+	      
+	      
 //	      File screenshotFolder = new File(screenshotFolderPath);
 //
 //	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
@@ -148,44 +168,6 @@ public class BaseTest {
 //	          }
 //	      }
 	      
-	  }
-	    
-	  
-	  
-	  
-	  @AfterMethod(alwaysRun = true)
-	  public void afterTest(ITestResult result) {
-		  
-	      String runName = new File(PathManager.getRunFolderPath()).getName();
-	      
-	    
-
-	      
-	      String screenshotFolderPath =
-	              System.getProperty("user.dir")
-	              + File.separator + "screenshots"
-	              + File.separator + runName
-	              + File.separator + ThreadContext.get("testName");
-
-
-	      
-	      File logFolder = new File(PathManager.getTestFolderPath());
-
-	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
-
-	      if (logFiles != null) {
-
-	          ReportManager.getTest().info("📂 Logs:");
-
-	          for (File log : logFiles) {
-	              ReportManager.getTest().info(
-	                  "📄 <a href='file:///" + log.getAbsolutePath() + "'>"
-	                  + log.getName() + "</a>"
-	              );
-	          }
-	      }
-	      
-	      
 	      File screenshotFolder = new File(screenshotFolderPath);
 
 	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
@@ -194,11 +176,17 @@ public class BaseTest {
 
 	          ReportManager.getTest().info("📸 Screenshots:");
 
+	          String runNameRelative = new File(PathManager.getRunFolderPath()).getName();
+	          String testName = ThreadContext.get("testName");
+
 	          for (File img : images) {
+
+	              String relativeImgPath =
+	                      "../../screenshots/" + runNameRelative + "/" + testName + "/" + img.getName();
 
 	              ReportManager.getTest().info(
 	                  MediaEntityBuilder
-	                      .createScreenCaptureFromPath(img.getAbsolutePath())
+	                      .createScreenCaptureFromPath(relativeImgPath)
 	                      .build()
 	              );
 	          }
