@@ -59,7 +59,7 @@ jobs:
       - name: Copy to gh-pages
         run: |
           Remove-Item -Recurse -Force gh-pages/* -ErrorAction SilentlyContinue
-          Copy-Item -Recurse -Force temp/* gh-pages/
+          Copy-Item -Recurse -Force temp/*
 
 
 # ✅ Create index.html
