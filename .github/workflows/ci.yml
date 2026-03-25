@@ -14,7 +14,7 @@ jobs:
 
     permissions:
       contents: write
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,7 +52,7 @@ jobs:
       - name: Checkout gh-pages
         uses: actions/checkout@v4
         with:
-        ref: gh-pages
+          ref: gh-pages
 
 # ✅ Copy artifacts into gh-pages
       - name: Copy to gh-pages
