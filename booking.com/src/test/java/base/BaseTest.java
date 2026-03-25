@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+
 import driver.DManager;
 import pathManager.PathManager;
 import reporting.ReportManager;
@@ -60,8 +62,21 @@ public class BaseTest {
 	      driver = DManager.getDrivers();
 
 	      // 2. Test name
-	      String testName = result.getMethod().getMethodName();
+	   //   String testName = result.getMethod().getMethodName();
 
+	      String baseName = result.getMethod().getMethodName();
+
+	      String params = Arrays.toString(result.getParameters())
+	              .replaceAll("[\\[\\] ]", "")
+	              .replace(",", "_");
+
+	      String timestamp = LocalDateTime.now()
+	              .format(DateTimeFormatter.ofPattern("HH-mm-ss"));
+
+	      String testName = baseName 
+	              + (params.isEmpty() ? "" : "_" + params)
+	              + "_" + timestamp;
+	      
 	      // 3. Build test folder
 	      String path = PathManager.getRunFolderPath()
 	              + File.separator + testName;
@@ -70,9 +85,9 @@ public class BaseTest {
 
 	      PathManager.setTestFolderPath(path);
 
-	      // 4. Logging context
-	      String timestamp = LocalDateTime.now()
-	              .format(DateTimeFormatter.ofPattern("HH-mm-ss"));
+//	      // 4. Logging context
+//	      String timestamp = LocalDateTime.now()
+//	              .format(DateTimeFormatter.ofPattern("HH-mm-ss"));
 	      
 	      ThreadContext.put("logFileName", testName + "_" + timestamp);
 	      ThreadContext.put("logPath", path);
@@ -136,7 +151,6 @@ public class BaseTest {
 	  }
 	    
 	  
-
 	  
 	  
 	  @AfterMethod(alwaysRun = true)
@@ -144,11 +158,14 @@ public class BaseTest {
 		  
 	      String runName = new File(PathManager.getRunFolderPath()).getName();
 	      
+	    
+
+	      
 	      String screenshotFolderPath =
-	    	        System.getProperty("user.dir")
-	    	        + File.separator + "screenshots"
-	    	        + File.separator + runName
-	    	        + File.separator + result.getMethod().getMethodName();
+	              System.getProperty("user.dir")
+	              + File.separator + "screenshots"
+	              + File.separator + runName
+	              + File.separator + ThreadContext.get("testName");
 
 
 	      
