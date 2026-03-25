@@ -4,10 +4,7 @@
   <test thread-count="2" parallel="methods" name="Test">
     <classes>
       <class name="tests.AllTests">
-     <methods>
-     <include name="verifyLoginTest"></include>
-     </methods>
-     
+      
       </class>
     </classes>
   </test> <!-- Test -->
