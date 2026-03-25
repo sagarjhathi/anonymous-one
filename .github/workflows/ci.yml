@@ -63,12 +63,12 @@ jobs:
 
 # ✅ Create index.html
       - name: Create index.html
+        working-directory: gh-pages   # ✅ IMPORTANT
         run: |
-           $run = Get-ChildItem gh-pages/reports -Directory
-           $runName = $run.Name
+          $run = Get-ChildItem reports -Directory
+          $runName = $run.Name
 
-           Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
-
+          Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
 
 
 # ✅ Commit & push
