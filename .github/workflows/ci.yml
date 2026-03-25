@@ -32,6 +32,6 @@ jobs:
         with:
           name: test-results
           path: |
-             logs/
-             reports/
-             screenshots/
+            **/logs/
+            **/reports/
+            **/screenshots/
