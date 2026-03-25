@@ -44,32 +44,38 @@ jobs:
       - name: Save artifacts
         run: |
           mkdir temp
-          cp -r logs temp/
-          cp -r screenshots temp/
-          cp -r reports temp/
+          Copy-Item -Recurse -Force booking.com/logs temp/
+          Copy-Item -Recurse -Force booking.com/screenshots temp/
+          Copy-Item -Recurse -Force booking.com/reports temp/
 
 # ✅ Now switch branch
       - name: Checkout gh-pages
         uses: actions/checkout@v4
         with:
           ref: gh-pages
+          path: gh-pages
 
 # ✅ Copy artifacts into gh-pages
       - name: Copy to gh-pages
         run: |
-          rm -rf *
-          cp -r ../temp/* .
+          Remove-Item -Recurse -Force gh-pages/* -ErrorAction SilentlyContinue
+          Copy-Item -Recurse -Force temp/* gh-pages/
 
 # ✅ Create index.html
       - name: Create index
         run: |
-          echo '<meta http-equiv="refresh" content="0; url=reports/run_xxx/report.html">' > index.html
+            $run = Get-ChildItem gh-pages/reports | Sort-Object Name | Select-Object -Last 1
+            $runName = $run.Name
+            Set-Content gh-pages/index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/report.html'>"
+
+
 
 # ✅ Commit & push
       - name: Deploy
+        working-directory: gh-pages
         run: |
-            git config user.name "github-actions"
-            git config user.email "actions@github.com"
-            git add .
-            git commit -m "Update report"
-            git push    
+           git config user.name "github-actions"
+           git config user.email "actions@github.com"
+           git add .
+           git commit -m "Update report" -ErrorAction SilentlyContinue
+           git push
