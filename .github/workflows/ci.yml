@@ -12,6 +12,9 @@ jobs:
   test:
     runs-on: windows-latest
 
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,3 +38,38 @@ jobs:
             **/logs/
             **/reports/
             **/screenshots/
+
+
+        # ✅ Save artifacts BEFORE switching branch
+      - name: Save artifacts
+        run: |
+          mkdir temp
+          cp -r logs temp/
+          cp -r screenshots temp/
+          cp -r reports temp/
+
+# ✅ Now switch branch
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+        ref: gh-pages
+
+# ✅ Copy artifacts into gh-pages
+      - name: Copy to gh-pages
+        run: |
+          rm -rf *
+          cp -r ../temp/* .
+
+# ✅ Create index.html
+      - name: Create index
+        run: |
+          echo '<meta http-equiv="refresh" content="0; url=reports/run_xxx/report.html">' > index.html
+
+# ✅ Commit & push
+      - name: Deploy
+        run: |
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git add .
+            git commit -m "Update report"
+            git push    
