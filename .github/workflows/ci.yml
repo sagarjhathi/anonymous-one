@@ -57,10 +57,10 @@ jobs:
 
 # ✅ Copy artifacts into gh-pages
       - name: Copy to gh-pages
+        working-directory: gh-pages
         run: |
           Remove-Item -Recurse -Force gh-pages/* -ErrorAction SilentlyContinue
-          Copy-Item -Recurse -Force temp/*
-
+          Copy-Item -Recurse -Force ../temp/* .
 
 # ✅ Create index.html
       - name: Create index.html
