@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - '**'
+  schedule:
+    - cron: '0 18 * * *'    
 
 jobs:
   test:
@@ -25,9 +27,32 @@ jobs:
           distribution: 'temurin'
           java-version: '21'    
 
+
+
+      - name: Notify Start
+        run: |
+          $body = @{
+            content = "🚀 **CI STARTED**`nRepo: $env:GITHUB_REPOSITORY`nBranch: $env:GITHUB_REF_NAME`nRun: $env:GITHUB_RUN_ID"
+          } | ConvertTo-Json -Depth 10
+      
+          Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
+
       - name: Run Tests
         run: mvn clean test
         working-directory: booking.com
+
+
+
+      - name: Notify Failure
+        if: failure()
+        run: |
+          $body = @{
+            content = "❌ **CI FAILED**`nRepo: $env:GITHUB_REPOSITORY`nBranch: $env:GITHUB_REF_NAME`nRun: $env:GITHUB_RUN_ID`nReport: $env:REPORT_URL"
+          } | ConvertTo-Json -Depth 10
+      
+          Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
+
+
 
       - name: Upload test artifacts
         if: always()
@@ -140,3 +165,11 @@ jobs:
 
           git push origin gh-pages --force
 
+      - name: Notify Success
+        if: success()
+        run: |
+          $body = @{
+            content = "✅ **CI PASSED**`nRepo: $env:GITHUB_REPOSITORY`nBranch: $env:GITHUB_REF_NAME`nRun: $env:GITHUB_RUN_ID`nReport: $env:REPORT_URL"
+          } | ConvertTo-Json -Depth 10
+      
+          Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
