@@ -119,7 +119,6 @@ jobs:
       #   run: |
       #      Set-Content index.html "<meta http-equiv='refresh' content='0; url=$env:REPORT_PATH'>"
 
-
       - name: Create index
         run: |
              $content = @"
