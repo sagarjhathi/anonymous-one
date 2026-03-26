@@ -104,7 +104,7 @@ jobs:
           Copy-Item -Recurse -Force "$tempPath/logs/*" "logs/"
           Copy-Item -Recurse -Force "$tempPath/screenshots/*" "screenshots/"
 
-
+##
       - name: Find latest report
         run: |
           $latestFolder = Get-ChildItem -Path "reports" -Directory |
