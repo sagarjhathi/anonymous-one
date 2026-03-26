@@ -61,8 +61,10 @@ jobs:
       - name: Copy to gh-pages
         working-directory: gh-pages
         run: |
-          Remove-Item -Recurse -Force gh-pages/* -ErrorAction SilentlyContinue
-          Copy-Item -Recurse -Force ../temp/* .
+          Remove-Item -Recurse -Force reports/latest -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path reports/latest -Force
+
+          Copy-Item -Recurse -Force ../temp/reports/* reports/latest/
 
 # ✅ Create index.html
       - name: Create index.html
@@ -88,4 +90,3 @@ jobs:
 
            git push origin gh-pages --force
 
-           
