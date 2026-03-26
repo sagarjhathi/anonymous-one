@@ -55,6 +55,13 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+
+      - name: Clean gh-pages
+        working-directory: gh-pages
+        run: |
+           Remove-Item -Recurse -Force * -ErrorAction SilentlyContinue
+
+           
 # ✅ Copy artifacts into gh-pages
       - name: Copy to gh-pages
         working-directory: gh-pages
