@@ -69,15 +69,12 @@ jobs:
 
 # ✅ Commit & push
       - name: Deploy
-        working-directory: gh-pages
         run: |
-           git checkout -B gh-pages
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-           git config user.name "github-actions"
-           git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update report" || echo "No changes"
 
-           git add .
-           git commit -m "Update report" || echo "No changes"
-
-           git push origin gh-pages --force
+          git push origin gh-pages --force
 
