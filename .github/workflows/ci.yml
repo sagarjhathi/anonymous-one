@@ -61,19 +61,12 @@ jobs:
       - name: Copy to gh-pages
         working-directory: gh-pages
         run: |
-          Remove-Item -Recurse -Force reports/latest -ErrorAction SilentlyContinue
-          New-Item -ItemType Directory -Path reports/latest -Force
+           Remove-Item -Recurse -Force reports/latest -ErrorAction SilentlyContinue
+           New-Item -ItemType Directory -Path reports/latest -Force
 
-          Copy-Item -Recurse -Force ../temp/reports/* reports/latest/
+           $run = Get-ChildItem ../temp/reports -Directory | Select-Object -First 1
 
-# ✅ Create index.html
-      - name: Create index.html
-        working-directory: gh-pages   # ✅ IMPORTANT
-        run: |
-          $run = Get-ChildItem reports -Directory
-          $runName = $run.Name
-
-          Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/$runName/ExtentReport.html'>"
+           Copy-Item -Recurse -Force "$($run.FullName)/*" reports/latest/
 
 
 # ✅ Commit & push
