@@ -53,20 +53,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: gh-pages
-          path: gh-pages
 
 
 
-# ✅ Copy artifacts into gh-pages
-      - name: Copy to gh-pages
-        working-directory: gh-pages
+# ✅ # 7️⃣ Clean + copy latest report
+      - name: Prepare gh-pages content
         run: |
-           Remove-Item -Recurse -Force reports/latest -ErrorAction SilentlyContinue
+           Remove-Item -Recurse -Force * -ErrorAction SilentlyContinue
+
            New-Item -ItemType Directory -Path reports/latest -Force
 
-           $run = Get-ChildItem ../temp/reports -Directory | Select-Object -First 1
+           $run = Get-ChildItem ../temp/reports -Directory |
+                  Sort-Object LastWriteTime |
+                  Select-Object -Last 1
 
            Copy-Item -Recurse -Force "$($run.FullName)/*" reports/latest/
+
+    # 8️⃣ Create static index.html
+      - name: Create index
+        run: |
+           Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/latest/ExtentReport.html'>"
 
 
 # ✅ Commit & push
