@@ -48,15 +48,21 @@ jobs:
       #     Copy-Item -Recurse -Force booking.com/screenshots temp/
       #     Copy-Item -Recurse -Force booking.com/reports temp/
 
+      - name: Debug project structure
+        run: |
+           Get-ChildItem -Recurse -Directory
+
       - name: Save artifacts
         run: |
-            $tempPath = "$env:RUNNER_TEMP\artifacts"
+          $tempPath = "$env:RUNNER_TEMP\artifacts"
 
-            New-Item -ItemType Directory -Path $tempPath -Force
+          New-Item -ItemType Directory -Path $tempPath -Force
 
-            Copy-Item -Recurse -Force <CORRECT_PATH_TO_REPORTS> "$tempPath/reports"
+          Copy-Item -Recurse -Force "booking.com/reports" "$tempPath/reports"
+          Copy-Item -Recurse -Force "booking.com/logs" "$tempPath/logs"
+          Copy-Item -Recurse -Force "booking.com/screenshots" "$tempPath/screenshots"
 
-            
+
 # ✅ Now switch branch
       - name: Checkout gh-pages
         uses: actions/checkout@v4
