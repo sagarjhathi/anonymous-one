@@ -75,7 +75,7 @@ jobs:
         run: |
            Get-ChildItem "$env:RUNNER_TEMP\artifacts" -Recurse
 
-           
+
 # ✅ Now switch branch
       - name: Checkout gh-pages
         uses: actions/checkout@v4
@@ -89,11 +89,35 @@ jobs:
         run: |
            Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
 
-    # 8️⃣ Create static index.html
+
+      - name: Restore artifacts to gh-pages
+        run: |
+          $tempPath = "$env:RUNNER_TEMP\artifacts"
+      
+          # Create folders
+          New-Item -ItemType Directory -Path "reports" -Force
+          New-Item -ItemType Directory -Path "logs" -Force
+          New-Item -ItemType Directory -Path "screenshots" -Force
+      
+          # Copy everything
+          Copy-Item -Recurse -Force "$tempPath/reports/*" "reports/"
+          Copy-Item -Recurse -Force "$tempPath/logs/*" "logs/"
+          Copy-Item -Recurse -Force "$tempPath/screenshots/*" "screenshots/"
+
+
+      - name: Find latest report
+        run: |
+          $latestFolder = Get-ChildItem -Path "reports" -Directory |
+                          Sort-Object Name -Descending |
+                          Select-Object -First 1
+       
+          $reportPath = "reports/$($latestFolder.Name)/ExtentReport.html"
+       
+          echo "REPORT_PATH=$reportPath" >> $env:GITHUB_ENV
+
       - name: Create index
         run: |
-           Set-Content index.html "<meta http-equiv='refresh' content='0; url=reports/latest/ExtentReport.html'>"
-
+           Set-Content index.html "<meta http-equiv='refresh' content='0; url=$env:REPORT_PATH'>"
 
 # ✅ Commit & push
       - name: Deploy
