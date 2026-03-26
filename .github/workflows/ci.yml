@@ -56,18 +56,10 @@ jobs:
 
 
 
-# ✅ # 7️⃣ Clean + copy latest report
-      - name: Prepare gh-pages content
+# ✅ 
+      - name: Clean gh-pages
         run: |
-           Remove-Item -Recurse -Force * -ErrorAction SilentlyContinue
-
-           New-Item -ItemType Directory -Path reports/latest -Force
-
-           $run = Get-ChildItem ../temp/reports -Directory |
-                  Sort-Object LastWriteTime |
-                  Select-Object -Last 1
-
-           Copy-Item -Recurse -Force "$($run.FullName)/*" reports/latest/
+           Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
 
     # 8️⃣ Create static index.html
       - name: Create index
