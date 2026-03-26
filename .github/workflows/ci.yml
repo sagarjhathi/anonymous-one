@@ -41,13 +41,22 @@ jobs:
 
 
         # ✅ Save artifacts BEFORE switching branch
+      # - name: Save artifacts
+      #   run: |
+      #     mkdir temp
+      #     Copy-Item -Recurse -Force booking.com/logs temp/
+      #     Copy-Item -Recurse -Force booking.com/screenshots temp/
+      #     Copy-Item -Recurse -Force booking.com/reports temp/
+
       - name: Save artifacts
         run: |
-          mkdir temp
-          Copy-Item -Recurse -Force booking.com/logs temp/
-          Copy-Item -Recurse -Force booking.com/screenshots temp/
-          Copy-Item -Recurse -Force booking.com/reports temp/
+            $tempPath = "$env:RUNNER_TEMP\artifacts"
 
+            New-Item -ItemType Directory -Path $tempPath -Force
+
+            Copy-Item -Recurse -Force <CORRECT_PATH_TO_REPORTS> "$tempPath/reports"
+
+            
 # ✅ Now switch branch
       - name: Checkout gh-pages
         uses: actions/checkout@v4
