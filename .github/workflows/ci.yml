@@ -14,6 +14,11 @@ jobs:
   test:
     runs-on: windows-latest
 
+    env:
+    DISCORD_WEBHOOK: ${{ secrets.ANONYMOUSONE }}
+    REPORT_URL: https://sagarjhathi.github.io/anonymous-one/
+
+    
     permissions:
       contents: write
 
