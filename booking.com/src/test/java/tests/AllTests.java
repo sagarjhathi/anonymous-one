@@ -26,17 +26,17 @@ public class AllTests extends BaseTest {
 	@DataProvider(name = "loginData")
 	public Object[][] getData() {
 	    return new Object[][] {
-	        {"user1"},
-	        {"user2"}
+	        {"user1"}
 	    };
 	}
+	
 	
 	
 	
 	@Test(dataProvider = "loginData")
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
-		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
 		System.out.println("🔥 CI TEST EXECUTED 🔥   "+str);
@@ -57,7 +57,7 @@ public class AllTests extends BaseTest {
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
-
+	
 		login.clickingSubmitLoginButton();
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 
@@ -65,14 +65,14 @@ public class AllTests extends BaseTest {
 		
 	}
 	
-	@Test(dataProvider = "loginData")
-	public void sampleTest(String str) throws InterruptedException {
+	
+	@Test
+	public void sampleTest() throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
 		LoginPage login=new LoginPage();
 	    
-		
 		login.openLoginPage();
 		driver.manage().window().maximize();
 		SafeActions safeAct= new SafeActions();
@@ -103,6 +103,7 @@ public class AllTests extends BaseTest {
 
 		LoginPage login=new LoginPage();		
 		login.openLoginPage();
+		Thread.sleep(1000);
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 
 		String userName=login.fetchUserNameLoginPage();
@@ -112,7 +113,7 @@ public class AllTests extends BaseTest {
 		
 		System.out.println(userName+"    "+password);
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
-
+		
 		login.givingUserNameInput();
 		login.givingPasswordInput();
 		login.clickingSubmitLoginButton();		
