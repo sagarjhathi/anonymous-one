@@ -153,9 +153,9 @@ jobs:
           $run = $env:RUN_FOLDER
           $reportPath = "$run/reports/ExtentReport.html"
       
-          Set-Content index.html "<meta http-equiv='refresh' content='0; url=url=$env:REPORT_PATH'>"
-
-
+          $content = "<meta http-equiv='refresh' content='0; url=$reportPath'>"
+      
+          Set-Content -Path index.html -Value $content
 
 
 # ✅ Commit & push
