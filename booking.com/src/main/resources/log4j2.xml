@@ -8,15 +8,15 @@
     </Console>
 
     <Routing name="RoutingAppender">
-        <Routes pattern="$${ctx:logFileName}">
-            <Route>
-                <File name="FileAppender-${ctx:logPath}"
-                       fileName="${ctx:logPath}/${ctx:logFileName}.log">
-                    <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %X{testName} - %msg%n"/>
-                </File>
-            </Route>
-        </Routes>
-    </Routing>
+    <Routes pattern="$${ctx:logFileName}">
+        <Route>
+            <File name="FileAppender-${ctx:logFileName}"
+                  fileName="${ctx:logPath}/${ctx:logFileName}.log">
+                <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %X{testName} - %msg%n"/>
+            </File>
+        </Route>
+    </Routes>
+</Routing>
 
 </Appenders>
     
