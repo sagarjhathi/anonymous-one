@@ -29,4 +29,28 @@ public class PathManager {
     public static void clearTestFolder() {
         testFolderPath.remove();
     }
+    
+    
+    
+    
+    
+    public static String getRunFolder() {
+        return runFolderPath;
+    }
+
+    public static String getReportPath() {
+        return getRunFolder() + File.separator + "reports";
+    }
+
+    public static String getReportFilePath() {
+        return getReportPath() + File.separator + "ExtentReport.html";
+    }
+
+    public static String getLogPath(String testName) {
+        return getRunFolder() + File.separator + "logs" + File.separator + testName;
+    }
+
+    public static String getScreenshotPath(String testName) {
+        return getRunFolder() + File.separator + "screenshots" + File.separator + testName;
+    }
 }
