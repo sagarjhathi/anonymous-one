@@ -59,15 +59,23 @@ jobs:
 
 
 
+      - name: Find latest run folder
+        id: find_run
+        run: |
+           $runFolder = Get-ChildItem -Path "booking.com" -Directory -Filter "run_*" |
+                         Sort-Object LastWriteTime -Descending |
+                         Select-Object -First 1
+        
+            echo "RUN_FOLDER=$($runFolder.Name)" >> $env:GITHUB_ENV
+
+
+
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: |
-            **/logs/
-            **/reports/
-            **/screenshots/
+          path: booking.com/${{ env.RUN_FOLDER }}
 
 
         # ✅ Save artifacts BEFORE switching branch
@@ -82,23 +90,15 @@ jobs:
         run: |
            Get-ChildItem -Recurse -Directory
 
+
       - name: Save artifacts
         run: |
-           $tempPath = "$env:RUNNER_TEMP\artifacts"
-
-           # Clean temp (important)
-           Remove-Item -Recurse -Force $tempPath -ErrorAction SilentlyContinue
-       
-           # Create structure
-           New-Item -ItemType Directory -Path "$tempPath/reports" -Force
-           New-Item -ItemType Directory -Path "$tempPath/logs" -Force
-           New-Item -ItemType Directory -Path "$tempPath/screenshots" -Force
-       
-           # Copy correctly
-           Copy-Item -Recurse -Force "booking.com/reports/*" "$tempPath/reports/"
-           Copy-Item -Recurse -Force "booking.com/logs/*" "$tempPath/logs/"
-           Copy-Item -Recurse -Force "booking.com/screenshots/*" "$tempPath/screenshots/"
-
+          $tempPath = "$env:RUNNER_TEMP\artifacts"
+          $run = $env:RUN_FOLDER
+      
+          Remove-Item -Recurse -Force $tempPath -ErrorAction SilentlyContinue
+      
+          Copy-Item -Recurse -Force "booking.com/$run" "$tempPath/"
 
 
       - name: Debug temp
@@ -123,16 +123,15 @@ jobs:
       - name: Restore artifacts to gh-pages
         run: |
           $tempPath = "$env:RUNNER_TEMP\artifacts"
+          $run = $env:RUN_FOLDER
       
-          # Create folders
-          New-Item -ItemType Directory -Path "reports" -Force
-          New-Item -ItemType Directory -Path "logs" -Force
-          New-Item -ItemType Directory -Path "screenshots" -Force
+          New-Item -ItemType Directory -Path "reports/$run" -Force
+          New-Item -ItemType Directory -Path "logs/$run" -Force
+          New-Item -ItemType Directory -Path "screenshots/$run" -Force
       
-          # Copy everything
-          Copy-Item -Recurse -Force "$tempPath/reports/*" "reports/"
-          Copy-Item -Recurse -Force "$tempPath/logs/*" "logs/"
-          Copy-Item -Recurse -Force "$tempPath/screenshots/*" "screenshots/"
+          Copy-Item -Recurse -Force "$tempPath/$run/reports/*" "reports/$run/"
+          Copy-Item -Recurse -Force "$tempPath/$run/logs/*" "logs/$run/"
+          Copy-Item -Recurse -Force "$tempPath/$run/screenshots/*" "screenshots/$run/"
 
 ##
       - name: Find latest report
