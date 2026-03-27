@@ -9,6 +9,8 @@ import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import pathManager.PathManager;
+
 public class ReportManager {
 
     private static ExtentReports extent;
@@ -17,20 +19,36 @@ public class ReportManager {
     // 🔹 Initialize report (run-level)
     public static void initReport(String runPath) {
 
-    	String timestamp = LocalDateTime.now()
-  	          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+//    	String timestamp = LocalDateTime.now()
+//  	          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+//    	
+//	      String extentPath = runPath +File.separator+ "reports"
+//	              + File.separator +"ExtentReport.html";
+//	      
+//	      String extentRunPath = System.getProperty("user.dir")
+//	              + File.separator + "reports"
+//	              + File.separator + "run_" + timestamp+File.separator+"ExtentReport.html";
+//	
+//	      System.out.println(extentPath+"    extent path here for testing");
+//        ExtentSparkReporter reporter =
+//                new ExtentSparkReporter(extentPath);
+//        reporter.config().setTheme(Theme.DARK); 
+//
+//        
+//        
+//        extent = new ExtentReports();
+//        extent.attachReporter(reporter);
     	
-	      String extentPath = System.getProperty("user.dir")
-	              + File.separator + "reports"
-	              + File.separator + "run_" + timestamp+File.separator+"ExtentReport.html";
-	
-        ExtentSparkReporter reporter =
-                new ExtentSparkReporter(extentPath);
-        reporter.config().setTheme(Theme.DARK); 
+    	
+    	 String extentPath = PathManager.getReportFilePath();
 
-        
-        extent = new ExtentReports();
-        extent.attachReporter(reporter);
+    	    new File(PathManager.getReportPath()).mkdirs(); // ensure folder
+
+    	    ExtentSparkReporter reporter = new ExtentSparkReporter(extentPath);
+    	    reporter.config().setTheme(Theme.DARK);
+
+    	    extent = new ExtentReports();
+    	    extent.attachReporter(reporter);
     }
 
     // 🔹 Create test (per test method)

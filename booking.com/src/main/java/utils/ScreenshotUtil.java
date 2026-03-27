@@ -16,54 +16,30 @@ public class ScreenshotUtil {
     public static String capture(WebDriver driver, String... names) {
 
         try {
-            // Step 1: build name
-            String baseName;
+//
+        	String testName = ThreadContext.get("testName");
 
-            if (names == null || names.length == 0) {
-                baseName = "screenshot";
-            } else {
-                baseName = String.join("_", names);
-            }
+        	String screenShotPath = PathManager.getScreenshotPath(testName);
 
-            // Step 2: timestamp
-            String timestamp = LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("HH-mm-ss-SSS"));
+        	// create folder
+        	File folder = new File(screenShotPath);
+        	folder.mkdirs();
 
-            String fileName = baseName + "_" + timestamp + ".png";
+        	// unique filename
+        	String fileName = testName + "_" +
+        	        LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss-SSS")) +
+        	        "_" + System.nanoTime() + ".png";
 
-            // Step 3: get paths
-            String runName = new File(PathManager.getRunFolderPath()).getName();
+        	
+        	String finalPath = screenShotPath + File.separator + fileName;
 
+        	// capture
+        	File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        	File dest = new File(finalPath);
 
-            
-            String testName = ThreadContext.get("testName");
-            if (testName == null) {
-                testName = "default";
-            }
+        	Files.copy(src.toPath(), dest.toPath());
 
-            String folderPath = System.getProperty("user.dir")
-                    + File.separator + "screenshots"
-                    + File.separator + runName
-                    + File.separator + testName;
-
-            // Step 4: create folder
-            File folder = new File(folderPath);
-            if (!folder.exists()) {
-                folder.mkdirs();
-            }
-
-            // Step 5: final path
-            String finalPath = folderPath + File.separator + fileName;
-
-            // Step 6: capture
-            File src = ((TakesScreenshot) driver)
-                    .getScreenshotAs(OutputType.FILE);
-
-            File dest = new File(finalPath);
-
-            Files.copy(src.toPath(), dest.toPath());
-
-            return finalPath;
+        	return finalPath;
 
         } catch (Exception e) {
             System.out.println("Screenshot failed: " + e.getMessage());
