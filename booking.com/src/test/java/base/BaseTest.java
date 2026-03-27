@@ -33,27 +33,25 @@ public class BaseTest {
 	  @BeforeSuite(alwaysRun = true)
 	  public void createRunFolder() {
 		  
-		  
 	      String timestamp = LocalDateTime.now()
-	          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-
-	      String path = System.getProperty("user.dir")
-	              + File.separator + "logs"
+          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+	      
+	      String runPath= System.getProperty("user.dir")
 	              + File.separator + "run_" + timestamp;
-      
+	      
+	      System.out.println(runPath+"    RUN PATH HERE FOR TESTING");
 	      
 	      
-	      ReportManager.initReport(path);
-	    		
-
-	      File folder = new File(path);
-	      folder.mkdirs();
-
-	      PathManager.setRunFolderPath(path);  // ✅ CRITICAL
+		  PathManager.setRunFolderPath(runPath);
+	      ReportManager.initReport(runPath);
+	 
+	      File runFolder = new File(runPath);
+	      runFolder.mkdirs();
 	  }
 
 	    	    
 	    
+	  
 	  @BeforeMethod(alwaysRun = true)
 	  public void beforeTest(ITestResult result) {
 
@@ -77,13 +75,14 @@ public class BaseTest {
 	      // 3. Build test folder
 	      String path = PathManager.getRunFolderPath()
 	              + File.separator + testName;
-
-	      new File(path).mkdirs();
+	    		  
+	      String logPathName = PathManager.getLogPath(testName);
+	    		  
 
 	      PathManager.setTestFolderPath(path);
 	      
-	      ThreadContext.put("logFileName", testName + "_" + timestamp);
-	      ThreadContext.put("logPath", path);
+	      ThreadContext.put("logFileName", testName);
+	      ThreadContext.put("logPath", logPathName);
 	      ThreadContext.put("testName", testName);
 	      ReportManager.createTest(testName);
 	      
