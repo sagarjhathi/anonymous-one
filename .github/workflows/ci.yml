@@ -139,22 +139,21 @@ jobs:
           }
 
 ##
-      - name: Find latest report
+      - name: Set report path
         run: |
-          $latestFolder = Get-ChildItem -Path "reports" -Directory |
-                          Sort-Object Name -Descending |
-                          Select-Object -First 1
-       
-          $reportPath = "reports/$($latestFolder.Name)/ExtentReport.html"
-       
+          $run = $env:RUN_FOLDER
+          $reportPath = "$run/reports/ExtentReport.html"
+
           echo "REPORT_PATH=$reportPath" >> $env:GITHUB_ENV
 
+
+          
       - name: Create index
         run: |
           $run = $env:RUN_FOLDER
           $reportPath = "$run/reports/ExtentReport.html"
       
-          Set-Content index.html "<meta http-equiv='refresh' content='0; url=$reportPath'>"
+          Set-Content index.html "<meta http-equiv='refresh' content='0; url=url=$env:REPORT_PATH'>"
 
 
 
