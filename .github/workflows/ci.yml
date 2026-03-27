@@ -96,12 +96,17 @@ jobs:
           $tempPath = "$env:RUNNER_TEMP\artifacts"
           $run = $env:RUN_FOLDER
       
-          Remove-Item -Recurse -Force $tempPath -ErrorAction SilentlyContinue
+          # Ensure temp exists
+          New-Item -ItemType Directory -Path $tempPath -Force
       
+          # Clean old
+          Remove-Item -Recurse -Force "$tempPath/$run" -ErrorAction SilentlyContinue
+      
+          # Copy run folder
           Copy-Item -Recurse -Force "booking.com/$run" "$tempPath/"
 
 
-      - name: Debug temp
+      - name: Debug temp after save
         run: |
            Get-ChildItem "$env:RUNNER_TEMP\artifacts" -Recurse
 
@@ -125,7 +130,13 @@ jobs:
           $tempPath = "$env:RUNNER_TEMP\artifacts"
           $run = $env:RUN_FOLDER
       
-          Copy-Item -Recurse -Force "$tempPath/$run" "."
+          if (Test-Path "$tempPath/$run") {
+              Copy-Item -Recurse -Force "$tempPath/$run" "."
+          } else {
+              Write-Host "Run folder not found in temp!"
+              Get-ChildItem "$tempPath" -Recurse
+              exit 1
+          }
 
 ##
       - name: Find latest report
