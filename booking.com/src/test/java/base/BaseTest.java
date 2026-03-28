@@ -130,20 +130,20 @@ public class BaseTest {
 //	      }
 	      
 	      
-	      File logFolder = new File(PathManager.getTestFolderPath());
+	      String testName = ThreadContext.get("testName");
+
+	      File logFolder = new File(PathManager.getLogPath(testName));
 
 	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
 
-	      if (logFiles != null) {
+	      if (logFiles != null && logFiles.length > 0) {
 
 	          ReportManager.getTest().info("📂 Logs:");
 
-	          String testName = ThreadContext.get("testName");
-
 	          for (File log : logFiles) {
 
-	        	  String relativePath =
-	        			    "../logs/" + testName + "/" + log.getName();
+	              String relativePath =
+	                      "../logs/" + testName + "/" + log.getName();
 
 	              ReportManager.getTest().info(
 	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
@@ -179,7 +179,7 @@ public class BaseTest {
 
 	          ReportManager.getTest().info("📸 Screenshots:");
 
-	          String testName = ThreadContext.get("testName");
+	          
 
 	          for (File img : images) {
 
@@ -199,6 +199,7 @@ public class BaseTest {
 	      DManager.removeDriver();
 	      
 	  }
+	  
 	  
 	  
 	  
