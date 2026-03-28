@@ -85,10 +85,7 @@ public class BaseTest {
 	      ThreadContext.put("logPath", logPathName);
 	      ThreadContext.put("testName", testName);
 	      ReportManager.createTest(testName);
-	      
-	      String testFolderPath = PathManager.getTestFolderPath();
-
-	      
+	      	      
 	  }
 	    
 	  
@@ -97,99 +94,103 @@ public class BaseTest {
 	  @AfterMethod(alwaysRun = true)
 	  public void afterTest(ITestResult result) {
 		  
-	      String runName = new File(PathManager.getRunFolderPath()).getName();
-	      
-	    
-	      
+	      	      
 	      String screenshotFolderPath =
 	    		    PathManager.getRunFolderPath()
 	    		    + File.separator + "screenshots"
 	    		    + File.separator + ThreadContext.get("testName");
-//	      
-//	      String screenshotFolderPath =
-//	              System.getProperty("user.dir")
-//	              + File.separator + "screenshots"
-//	              + File.separator + runName
-//	              + File.separator + ThreadContext.get("testName");
 
-	      
-//	      File logFolder = new File(PathManager.getTestFolderPath());
-//
-//	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
-//
-//	      if (logFiles != null) {
-//
-//	          ReportManager.getTest().info("📂 Logs:");
-//
-//	          for (File log : logFiles) {
-//	              ReportManager.getTest().info(
-//	                  "📄 <a href='file:///" + log.getAbsolutePath() + "'>"
-//	                  + log.getName() + "</a>"
-//	              );
-//	          }
-//	      }
 	      
 	      
 	      String testName = ThreadContext.get("testName");
 
 	      File logFolder = new File(PathManager.getLogPath(testName));
+//
+//	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
+//
+//	      if (logFiles != null && logFiles.length > 0) {
+//
+//	          ReportManager.getTest().info("📂 Logs:");
+//
+//	          for (File log : logFiles) {
+//
+//	              String relativePath =
+//	                      "../logs/" + testName + "/" + log.getName();
+//
+//	              ReportManager.getTest().info(
+//	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
+//	              );
+//	          }
+//	      }
+	      
+	      
+	      File[] allFilesLogs = logFolder.listFiles();
 
-	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
-
-	      if (logFiles != null && logFiles.length > 0) {
+	      if (allFilesLogs != null && allFilesLogs.length > 0) {
 
 	          ReportManager.getTest().info("📂 Logs:");
 
-	          for (File log : logFiles) {
 
-	              String relativePath =
-	                      "../logs/" + testName + "/" + log.getName();
+	          for (File log : allFilesLogs) {
 
-	              ReportManager.getTest().info(
-	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
-	              );
+	              if (log.getName().endsWith(".log")) {
+
+	                  String relativePath =
+	                          "../logs/" + testName + "/" + log.getName();
+
+	                  ReportManager.getTest().info(
+	                      "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
+	                  );
+	              }
 	          }
 	      }
 	      
 	      
-	      
-//	      File screenshotFolder = new File(screenshotFolderPath);
-//
+	      File screenshotFolder = new File(screenshotFolderPath);
+
 //	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
 //
 //	      if (images != null && images.length > 0) {
 //
 //	          ReportManager.getTest().info("📸 Screenshots:");
 //
+//	          
+//	          
+//
 //	          for (File img : images) {
 //
+//	        	  String relativeImgPath =
+//	        			    "../screenshots/" + testName + "/" + img.getName();
 //	              ReportManager.getTest().info(
 //	                  MediaEntityBuilder
-//	                      .createScreenCaptureFromPath(img.getAbsolutePath())
+//	                      .createScreenCaptureFromPath(relativeImgPath)
 //	                      .build()
 //	              );
 //	          }
 //	      }
 	      
-	      File screenshotFolder = new File(screenshotFolderPath);
+	      
+	     
 
-	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
+	      File[] allFilesImages = screenshotFolder.listFiles();
 
-	      if (images != null && images.length > 0) {
+	      if (allFilesImages != null && allFilesImages.length > 0) {
 
 	          ReportManager.getTest().info("📸 Screenshots:");
 
-	          
+	          for (File img : allFilesImages) {
 
-	          for (File img : images) {
+	              if (img.getName().endsWith(".png")) {
 
-	        	  String relativeImgPath =
-	        			    "../screenshots/" + testName + "/" + img.getName();
-	              ReportManager.getTest().info(
-	                  MediaEntityBuilder
-	                      .createScreenCaptureFromPath(relativeImgPath)
-	                      .build()
-	              );
+	                  String relativeImgPath =
+	                          "../screenshots/" + testName + "/" + img.getName();
+
+	                  ReportManager.getTest().info(
+	                      MediaEntityBuilder
+	                          .createScreenCaptureFromPath(relativeImgPath)
+	                          .build()
+	                  );
+	              }
 	          }
 	      }
 	      
@@ -199,6 +200,7 @@ public class BaseTest {
 	      DManager.removeDriver();
 	      
 	  }
+	  
 	  
 	  
 	  
