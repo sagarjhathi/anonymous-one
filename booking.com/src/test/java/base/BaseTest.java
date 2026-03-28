@@ -102,11 +102,15 @@ public class BaseTest {
 	    
 	      
 	      String screenshotFolderPath =
-	              System.getProperty("user.dir")
-	              + File.separator + "screenshots"
-	              + File.separator + runName
-	              + File.separator + ThreadContext.get("testName");
-
+	    		    PathManager.getRunFolderPath()
+	    		    + File.separator + "screenshots"
+	    		    + File.separator + ThreadContext.get("testName");
+//	      
+//	      String screenshotFolderPath =
+//	              System.getProperty("user.dir")
+//	              + File.separator + "screenshots"
+//	              + File.separator + runName
+//	              + File.separator + ThreadContext.get("testName");
 
 	      
 //	      File logFolder = new File(PathManager.getTestFolderPath());
@@ -134,19 +138,19 @@ public class BaseTest {
 
 	          ReportManager.getTest().info("📂 Logs:");
 
-	          String runNameRelative = new File(PathManager.getRunFolderPath()).getName();
 	          String testName = ThreadContext.get("testName");
 
 	          for (File log : logFiles) {
 
-	              String relativePath =
-	                      "../../logs/" + runNameRelative + "/" + testName + "/" + log.getName();
+	        	  String relativePath =
+	        			    "../logs/" + testName + "/" + log.getName();
 
 	              ReportManager.getTest().info(
 	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
 	              );
 	          }
 	      }
+	      
 	      
 	      
 //	      File screenshotFolder = new File(screenshotFolderPath);
@@ -175,14 +179,12 @@ public class BaseTest {
 
 	          ReportManager.getTest().info("📸 Screenshots:");
 
-	          String runNameRelative = new File(PathManager.getRunFolderPath()).getName();
 	          String testName = ThreadContext.get("testName");
 
 	          for (File img : images) {
 
-	              String relativeImgPath =
-	                      "../../screenshots/" + runNameRelative + "/" + testName + "/" + img.getName();
-
+	        	  String relativeImgPath =
+	        			    "../screenshots/" + testName + "/" + img.getName();
 	              ReportManager.getTest().info(
 	                  MediaEntityBuilder
 	                      .createScreenCaptureFromPath(relativeImgPath)
@@ -190,6 +192,7 @@ public class BaseTest {
 	              );
 	          }
 	      }
+	      
 		  
 	      ThreadContext.clearAll();
 	      PathManager.clearTestFolder();

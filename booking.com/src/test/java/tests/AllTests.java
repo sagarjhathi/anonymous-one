@@ -97,6 +97,7 @@ public class AllTests extends BaseTest {
 	
 	
 	
+	
 	@Test(dataProvider = "loginData")
 	public void verifyLoginTest1(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
