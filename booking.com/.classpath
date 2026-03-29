@@ -48,5 +48,6 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/91855/Downloads/eclipse-java-2024-12-R-win32-x86_64/eclipse/plugins/org.testng_7.4.0.r202105021533.jar" sourcepath="C:/Users/91855/Downloads/eclipse-java-2024-12-R-win32-x86_64/eclipse/plugins/org.testng.source_7.4.0.r202105021533.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

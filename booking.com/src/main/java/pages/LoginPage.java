@@ -39,19 +39,14 @@ public class LoginPage extends BasePage {
 	}
 	
 	public void givingUserNameInput() {
-//		driver.findElement(usernameInputLoginPage).sendKeys(fetchUserNameLoginPage());
 		safeAct.safeFindElement(usernameInputLoginPage).sendKeys(fetchUserNameLoginPage());
 	}
 	
-	public void givingPasswordInput() {
-	//	driver.findElement(passwordInputLoginPage).sendKeys(fetchPasswordLoginPage());
-		
+	public void givingPasswordInput() {		
 		safeAct.safeFindElement(passwordInputLoginPage).sendKeys(fetchPasswordLoginPage());
 	}
 	
-	public void clickingSubmitLoginButton() {
-		//driver.findElement(submitLoginPage).click();
-		
+	public void clickingSubmitLoginButton() {		
 		safeAct.safeClick(submitLoginPage);
 	}
 	
