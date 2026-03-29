@@ -1,5 +1,5 @@
 package tests;
-import java.time.Duration;
+import java.time.Duration; 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +15,7 @@ import driver.DManager;
 import pages.LoginPage;
 import utils.SafeActions;
 import utils.ScreenshotUtil;
+import retry.Retry;
 
 
 public class AllTests extends BaseTest {
@@ -33,7 +34,10 @@ public class AllTests extends BaseTest {
 	
 	
 	
-	@Test(dataProvider = "loginData")
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME");
@@ -66,7 +70,10 @@ public class AllTests extends BaseTest {
 	}
 	
 	
-	@Test
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void sampleTest() throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
@@ -97,8 +104,10 @@ public class AllTests extends BaseTest {
 	
 	
 	
-	
-	@Test(dataProvider = "loginData")
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void verifyLoginTest1(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
@@ -122,7 +131,10 @@ public class AllTests extends BaseTest {
 
 	}
 	
-	@Test(dataProvider = "loginData")
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void sampleTest1(String str) throws InterruptedException {
 		
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
@@ -153,7 +165,10 @@ public class AllTests extends BaseTest {
 	
 	
 	
-	@Test(dataProvider = "loginData")
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void verifyLoginTest2(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 
@@ -177,7 +192,10 @@ public class AllTests extends BaseTest {
 
 	}
 	
-	@Test(dataProvider = "loginData")
+	@Test(
+		    dataProvider = "loginData",
+		    retryAnalyzer = Retry.class
+		)
 	public void sampleTest2(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		

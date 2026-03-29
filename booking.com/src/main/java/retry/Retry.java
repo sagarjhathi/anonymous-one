@@ -3,7 +3,7 @@ package retry;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-public class RetryAnalyzer implements IRetryAnalyzer{
+public class Retry implements IRetryAnalyzer{
 
 	private int count = 0;
     private static final int maxRetry = 2;
