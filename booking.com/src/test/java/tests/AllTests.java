@@ -27,10 +27,10 @@ public class AllTests extends BaseTest {
 	@DataProvider(name = "loginData")
 	public Object[][] getData() {
 	    return new Object[][] {
-	        {"user1"}
+	        {"user1"},
+	        {"user2"}
 	    };
 	}
-	
 	
 	
 	
@@ -87,6 +87,7 @@ public class AllTests extends BaseTest {
 		String password =login.fetchPasswordLoginPage();
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
+		
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 
 		System.out.println(userName+"    "+password);

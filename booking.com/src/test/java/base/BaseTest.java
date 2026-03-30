@@ -58,6 +58,7 @@ public class BaseTest {
 	      // 1. Driver
 	      DManager.setDriver();
 	      driver = DManager.getDrivers();
+	     
 
 	      String baseName = result.getMethod().getMethodName();
 
@@ -84,10 +85,10 @@ public class BaseTest {
 	      ThreadContext.put("logFileName", testName);
 	      ThreadContext.put("logPath", logPathName);
 	      ThreadContext.put("testName", testName);
-	      ReportManager.createTest(testName);
 	      	      
 	  }
 	    
+	  
 	  
 	  
 	  
@@ -101,28 +102,10 @@ public class BaseTest {
 	    		    + File.separator + ThreadContext.get("testName");
 
 	      
-	      
 	      String testName = ThreadContext.get("testName");
-
-	      File logFolder = new File(PathManager.getLogPath(testName));
-//
-//	      File[] logFiles = logFolder.listFiles((dir, name) -> name.endsWith(".log"));
-//
-//	      if (logFiles != null && logFiles.length > 0) {
-//
-//	          ReportManager.getTest().info("📂 Logs:");
-//
-//	          for (File log : logFiles) {
-//
-//	              String relativePath =
-//	                      "../logs/" + testName + "/" + log.getName();
-//
-//	              ReportManager.getTest().info(
-//	                  "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
-//	              );
-//	          }
-//	      }
+	      System.out.println(testName+"    checking the test name being null");
 	      
+	      File logFolder = new File(PathManager.getLogPath(testName));
 	      
 	      File[] allFilesLogs = logFolder.listFiles();
 
@@ -148,30 +131,6 @@ public class BaseTest {
 	      
 	      File screenshotFolder = new File(screenshotFolderPath);
 
-//	      File[] images = screenshotFolder.listFiles((dir, name) -> name.endsWith(".png"));
-//
-//	      if (images != null && images.length > 0) {
-//
-//	          ReportManager.getTest().info("📸 Screenshots:");
-//
-//	          
-//	          
-//
-//	          for (File img : images) {
-//
-//	        	  String relativeImgPath =
-//	        			    "../screenshots/" + testName + "/" + img.getName();
-//	              ReportManager.getTest().info(
-//	                  MediaEntityBuilder
-//	                      .createScreenCaptureFromPath(relativeImgPath)
-//	                      .build()
-//	              );
-//	          }
-//	      }
-	      
-	      
-	     
-
 	      File[] allFilesImages = screenshotFolder.listFiles();
 
 	      if (allFilesImages != null && allFilesImages.length > 0) {
@@ -195,35 +154,11 @@ public class BaseTest {
 	      }
 	      
 	      
+	      System.out.println("Looking logs in: " + PathManager.getLogPath(testName));
+	      System.out.println("Looking screenshots in: " + PathManager.getScreenshotPath(testName));
 	      
-	      if (result.getStatus() == ITestResult.SUCCESS) {
-
-	    	    ReportManager.getTest().pass("Test Passed");
-
-	    	} else if (result.getStatus() == ITestResult.FAILURE) {
-
-	    	    Object isRetry = result.getAttribute("retry");
-
-	    	    if (isRetry != null) {
-	    	        // 🔁 intermediate failure → retry happening
-	    	        ReportManager.getTest().warning("Test Failed → Retrying...");
-	    	    } else {
-	    	        // ❌ final failure
-	    	        ReportManager.getTest().fail(result.getThrowable());
-	    	    }
-
-	    	} else if (result.getStatus() == ITestResult.SKIP) {
-
-	    	    Object isRetry = result.getAttribute("retry");
-
-	    	    if (isRetry != null) {
-	    	        // 🔁 retry attempt
-	    	        ReportManager.getTest().warning("Retry Attempt");
-	    	    } else {
-	    	        // ⚠️ actual skip
-	    	        ReportManager.getTest().skip("Test Skipped: " + result.getThrowable());
-	    	    }
-	    	}
+	      
+	      
 	      
 		  
 	      
@@ -232,7 +167,6 @@ public class BaseTest {
 	      DManager.removeDriver();
 	      
 	  }
-	  
 	  
 	  
 	  
