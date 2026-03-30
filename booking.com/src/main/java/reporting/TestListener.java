@@ -1,6 +1,7 @@
 package reporting;
 
 
+import org.apache.logging.log4j.ThreadContext;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -13,9 +14,9 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
 
-        String testName = result.getMethod().getMethodName();
-        ReportManager.createTest(testName);
+        ReportManager.createTest(ThreadContext.get("testName"));
     }
+    
 
     @Override
     public void onTestSuccess(ITestResult result) {
