@@ -17,28 +17,7 @@ public class ReportManager {
     private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     // 🔹 Initialize report (run-level)
-    public static void initReport(String runPath) {
-
-//    	String timestamp = LocalDateTime.now()
-//  	          .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-//    	
-//	      String extentPath = runPath +File.separator+ "reports"
-//	              + File.separator +"ExtentReport.html";
-//	      
-//	      String extentRunPath = System.getProperty("user.dir")
-//	              + File.separator + "reports"
-//	              + File.separator + "run_" + timestamp+File.separator+"ExtentReport.html";
-//	
-//	      System.out.println(extentPath+"    extent path here for testing");
-//        ExtentSparkReporter reporter =
-//                new ExtentSparkReporter(extentPath);
-//        reporter.config().setTheme(Theme.DARK); 
-//
-//        
-//        
-//        extent = new ExtentReports();
-//        extent.attachReporter(reporter);
-    	
+    public static void initReport(String runPath) {    	
     	
     	 String extentPath = PathManager.getReportFilePath();
 
