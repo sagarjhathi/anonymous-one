@@ -194,7 +194,39 @@ public class BaseTest {
 	          }
 	      }
 	      
+	      
+	      
+	      if (result.getStatus() == ITestResult.SUCCESS) {
+
+	    	    ReportManager.getTest().pass("Test Passed");
+
+	    	} else if (result.getStatus() == ITestResult.FAILURE) {
+
+	    	    Object isRetry = result.getAttribute("retry");
+
+	    	    if (isRetry != null) {
+	    	        // 🔁 intermediate failure → retry happening
+	    	        ReportManager.getTest().warning("Test Failed → Retrying...");
+	    	    } else {
+	    	        // ❌ final failure
+	    	        ReportManager.getTest().fail(result.getThrowable());
+	    	    }
+
+	    	} else if (result.getStatus() == ITestResult.SKIP) {
+
+	    	    Object isRetry = result.getAttribute("retry");
+
+	    	    if (isRetry != null) {
+	    	        // 🔁 retry attempt
+	    	        ReportManager.getTest().warning("Retry Attempt");
+	    	    } else {
+	    	        // ⚠️ actual skip
+	    	        ReportManager.getTest().skip("Test Skipped: " + result.getThrowable());
+	    	    }
+	    	}
+	      
 		  
+	      
 	      ThreadContext.clearAll();
 	      PathManager.clearTestFolder();
 	      DManager.removeDriver();

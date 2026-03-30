@@ -4,6 +4,7 @@
 
 	 <listeners>
         <listener class-name="retry.RetryListener"/>
+        <listener class-name="listeners.TestListener"/>
     </listeners>
     
   <test thread-count="2" parallel="methods" name="Test">
