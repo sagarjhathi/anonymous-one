@@ -14,7 +14,6 @@ public class BasePage {
 	
     public BasePage(){
     	
-    
     	driver=DManager.getDrivers();
     	
     }
