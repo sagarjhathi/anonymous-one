@@ -45,7 +45,7 @@ jobs:
 
       - name: Build project
         run: mvn clean compile
-
+        working-directory: booking.com
 
       - name: Run Tests
         run: mvn test
