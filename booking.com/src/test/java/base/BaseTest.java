@@ -78,8 +78,8 @@ public class BaseTest {
 	              + File.separator + testName;
 	    		  
 	      String logPathName = PathManager.getLogPath(testName);
-	    		  
-
+	    		  System.out.println(logPathName+"   here is the   logPathName");
+	    		  System.out.println(testName+"   here is the   testName");
 	      PathManager.setTestFolderPath(path);
 	      
 	      ThreadContext.put("logFileName", testName);
@@ -95,13 +95,6 @@ public class BaseTest {
 	  @AfterMethod(alwaysRun = true)
 	  public void afterTest(ITestResult result) {
 		  
-	      	      
-	      String screenshotFolderPath =
-	    		    PathManager.getRunFolderPath()
-	    		    + File.separator + "screenshots"
-	    		    + File.separator + ThreadContext.get("testName");
-
-	      
 	      String testName = ThreadContext.get("testName");
 	      System.out.println(testName+"    checking the test name being null");
 	      
@@ -129,7 +122,7 @@ public class BaseTest {
 	      }
 	      
 	      
-	      File screenshotFolder = new File(screenshotFolderPath);
+	      File screenshotFolder = new File(PathManager.getScreenshotPath(testName));
 
 	      File[] allFilesImages = screenshotFolder.listFiles();
 
@@ -156,11 +149,7 @@ public class BaseTest {
 	      
 	      System.out.println("Looking logs in: " + PathManager.getLogPath(testName));
 	      System.out.println("Looking screenshots in: " + PathManager.getScreenshotPath(testName));
-	      
-	      
-	      
-	      
-		  
+	     
 	      
 	      ThreadContext.clearAll();
 	      PathManager.clearTestFolder();

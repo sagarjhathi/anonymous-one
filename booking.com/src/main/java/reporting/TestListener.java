@@ -51,6 +51,7 @@ public class TestListener implements ITestListener {
             ReportManager.getTest().warning("Retry Attempt");
         } else {
             ReportManager.getTest().skip("Test Skipped");
+            ReportManager.getTest().fail(result.getThrowable());
         }
     }
     

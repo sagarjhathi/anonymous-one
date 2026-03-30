@@ -43,12 +43,13 @@ public class LoginPage extends BasePage {
 	}
 	
 	public void givingPasswordInput() {		
-		safeAct.safeFindElement(passwordInputLoginPage).sendKeys(fetchPasswordLoginPage());
+		safeAct.safeFindElement(passwordInputLoginPage).sendKeys();
 	}
 	
 	public void clickingSubmitLoginButton() {		
 		safeAct.safeClick(submitLoginPage);
 	}
+	
 	
 }
 	

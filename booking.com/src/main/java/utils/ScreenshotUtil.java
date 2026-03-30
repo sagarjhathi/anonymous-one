@@ -42,8 +42,9 @@ public class ScreenshotUtil {
         	return finalPath;
 
         } catch (Exception e) {
-            System.out.println("Screenshot failed: " + e.getMessage());
+            System.out.println("Screenshot failed: " + e.getMessage()+ThreadContext.get("testName"));
             return null;
         }
+        
     }
 }
