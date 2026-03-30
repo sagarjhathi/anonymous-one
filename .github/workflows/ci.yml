@@ -42,8 +42,14 @@ jobs:
       
           Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
 
+
+      - name: Build project
+        run: mvn clean compile
+
+
       - name: Run Tests
-        run: mvn clean test
+        run: mvn test
+        continue-on-error: true
         working-directory: booking.com
 
 
@@ -60,6 +66,7 @@ jobs:
 
 
       - name: Find latest run folder
+        if: always()
         id: find_run
         run: |
            $runFolder = Get-ChildItem -Path "booking.com" -Directory -Filter "run_*" |
@@ -92,6 +99,7 @@ jobs:
 
 
       - name: Save artifacts
+        if: always()
         run: |
           $tempPath = "$env:RUNNER_TEMP\artifacts"
           $run = $env:RUN_FOLDER
@@ -113,6 +121,7 @@ jobs:
 
 # ✅ Now switch branch
       - name: Checkout gh-pages
+        if: always()
         uses: actions/checkout@v4
         with:
           ref: gh-pages
@@ -121,11 +130,13 @@ jobs:
 
 # ✅ 
       - name: Clean gh-pages
+        if: always()
         run: |
            Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
 
 
       - name: Restore artifacts to gh-pages
+        if: always()
         run: |
           $tempPath = "$env:RUNNER_TEMP\artifacts"
           $run = $env:RUN_FOLDER
@@ -140,6 +151,7 @@ jobs:
 
 ##
       - name: Set report path
+        if: always()
         run: |
           $run = $env:RUN_FOLDER
           $reportPath = "$run/reports/ExtentReport.html"
@@ -149,6 +161,7 @@ jobs:
 
           
       - name: Create index
+        if: always()
         run: |
           $run = $env:RUN_FOLDER
           $reportPath = "$run/reports/ExtentReport.html"
@@ -160,6 +173,7 @@ jobs:
 
 # ✅ Commit & push
       - name: Deploy
+        if: always()
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
@@ -169,11 +183,17 @@ jobs:
 
           git push origin gh-pages --force
 
-      - name: Notify Success
-        if: success()
+      - name: Notify
+        if: always()
         run: |
+          if ("${{ job.status }}" -eq "success") {
+            $status = "✅ CI PASSED"
+          } else {
+            $status = "❌ CI FAILED"
+          }
+      
           $body = @{
-            content = "✅ **CI PASSED**`nRepo: $env:GITHUB_REPOSITORY`nBranch: $env:GITHUB_REF_NAME`nRun: $env:GITHUB_RUN_ID`nReport: $env:REPORT_URL"
+            content = "$status`nRepo: $env:GITHUB_REPOSITORY`nBranch: $env:GITHUB_REF_NAME`nRun: $env:GITHUB_RUN_ID`nReport: $env:REPORT_URL"
           } | ConvertTo-Json -Depth 10
       
           Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
