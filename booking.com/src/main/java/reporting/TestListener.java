@@ -15,6 +15,8 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
 
         ReportManager.createTest(ThreadContext.get("testName"));
+        Attachers.attachAllLogFolders(ThreadContext.get("testName"));
+        Attachers.attachAllImageFolders(ThreadContext.get("testName"));
     }
     
 
@@ -22,6 +24,8 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
 
         ReportManager.getTest().pass("Test Passed");
+        Attachers.attachAllLogFolders(ThreadContext.get("testName"));
+        Attachers.attachAllImageFolders(ThreadContext.get("testName"));
     }
 
     @Override
@@ -31,15 +35,14 @@ public class TestListener implements ITestListener {
 
         if (isRetry != null) {
             ReportManager.getTest().warning("Test Failed → Retrying...");
+            Attachers.attachAllLogFolders(ThreadContext.get("testName"));
+            Attachers.attachAllImageFolders(ThreadContext.get("testName"));
         } else {
             ReportManager.getTest().fail(result.getThrowable());
-
-            // optional screenshot
-            String path = ScreenshotUtil.capture(null); // pass driver if needed
-            if (path != null) {
-                ReportManager.getTest().addScreenCaptureFromPath(path);
-            }
+            Attachers.attachAllLogFolders(ThreadContext.get("testName"));
+            Attachers.attachAllImageFolders(ThreadContext.get("testName"));
         }
+        
     }
 
     @Override
@@ -54,6 +57,8 @@ public class TestListener implements ITestListener {
             ReportManager.getTest().skip("Test Skipped");
             ReportManager.getTest().fail(result.getThrowable());
         }
+        Attachers.attachAllLogFolders(ThreadContext.get("testName"));
+        Attachers.attachAllImageFolders(ThreadContext.get("testName"));
     }
     
     @Override
