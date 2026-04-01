@@ -10,9 +10,7 @@
   <test thread-count="3" parallel="methods" name="Test">
     <classes>
       <class name="tests.AllTests">
-		<methods>
-		<exclude name="verifyLoginTest"></exclude>
-		</methods>
+	
       </class>
     </classes>
   </test> <!-- Test -->
