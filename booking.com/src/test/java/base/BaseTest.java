@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import driver.DManager;
 import pathManager.PathManager;
+import reporting.Attachers;
 import reporting.ReportManager;
 
 import org.apache.logging.log4j.ThreadContext;
@@ -98,53 +99,55 @@ public class BaseTest {
 	      String testName = ThreadContext.get("testName");
 	      System.out.println(testName+"    checking the test name being null");
 	      
-	      File logFolder = new File(PathManager.getLogPath(testName)!=null ? PathManager.getLogPath(testName):"Default");
-	      
-	      File[] allFilesLogs = logFolder.listFiles();
+	      Attachers.attachAllLogFolders(testName);
+//	      File logFolder = new File(PathManager.getLogPath(testName)!=null ? PathManager.getLogPath(testName):"Default");
+//	      
+//	      File[] allFilesLogs = logFolder.listFiles();
+//
+//	      if (allFilesLogs != null && allFilesLogs.length > 0) {
+//
+//	          ReportManager.getTest().info("📂 Logs:");
+//
+//
+//	          for (File log : allFilesLogs) {
+//
+//	              if (log.getName().endsWith(".log")) {
+//
+//	                  String relativePath =
+//	                          "../logs/" + testName + "/" + log.getName();
+//
+//	                  ReportManager.getTest().info(
+//	                      "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
+//	                  );
+//	              }
+//	          }
+//	      }
+//	      
 
-	      if (allFilesLogs != null && allFilesLogs.length > 0) {
-
-	          ReportManager.getTest().info("📂 Logs:");
-
-
-	          for (File log : allFilesLogs) {
-
-	              if (log.getName().endsWith(".log")) {
-
-	                  String relativePath =
-	                          "../logs/" + testName + "/" + log.getName();
-
-	                  ReportManager.getTest().info(
-	                      "📄 <a href='" + relativePath + "'>" + log.getName() + "</a>"
-	                  );
-	              }
-	          }
-	      }
-	      
-	      
-	      File screenshotFolder = new File(PathManager.getScreenshotPath(testName)!=null ?PathManager.getScreenshotPath(testName): "Default");
-
-	      File[] allFilesImages = screenshotFolder.listFiles();
-
-	      if (allFilesImages != null && allFilesImages.length > 0) {
-
-	          ReportManager.getTest().info("📸 Screenshots:");
-
-	          for (File img : allFilesImages) {
-
-	              if (img.getName().endsWith(".png")) {
-
-	                  String relativeImgPath =
-	                          "../screenshots/" + testName + "/" + img.getName();
-
-	                  ReportManager.getTest().info(
-	                      MediaEntityBuilder
-	                          .createScreenCaptureFromPath(relativeImgPath)
-	                          .build()
-	                  );
-	              }
-	          }
-	      }
+	      Attachers.attachAllImageFolders(testName);
+//	      File screenshotFolder = new File(PathManager.getScreenshotPath(testName)!=null ?PathManager.getScreenshotPath(testName): "Default");
+//
+//	      File[] allFilesImages = screenshotFolder.listFiles();
+//
+//	      if (allFilesImages != null && allFilesImages.length > 0) {
+//
+//	          ReportManager.getTest().info("📸 Screenshots:");
+//
+//	          for (File img : allFilesImages) {
+//
+//	              if (img.getName().endsWith(".png")) {
+//
+//	                  String relativeImgPath =
+//	                          "../screenshots/" + testName + "/" + img.getName();
+//
+//	                  ReportManager.getTest().info(
+//	                      MediaEntityBuilder
+//	                          .createScreenCaptureFromPath(relativeImgPath)
+//	                          .build()
+//	                  );
+//	              }
+//	          }
+//	      }
 	      
 	      
 	      System.out.println("Looking logs in: " + PathManager.getLogPath(testName));
@@ -158,6 +161,7 @@ public class BaseTest {
 	  }
 	  
 	  
+	 
 	  
 	  
 	  @AfterSuite
