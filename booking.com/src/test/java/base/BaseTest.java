@@ -98,7 +98,7 @@ public class BaseTest {
 	      String testName = ThreadContext.get("testName");
 	      System.out.println(testName+"    checking the test name being null");
 	      
-	      File logFolder = new File(PathManager.getLogPath(testName));
+	      File logFolder = new File(PathManager.getLogPath(testName)!=null ? PathManager.getLogPath(testName):"Default");
 	      
 	      File[] allFilesLogs = logFolder.listFiles();
 
@@ -122,7 +122,7 @@ public class BaseTest {
 	      }
 	      
 	      
-	      File screenshotFolder = new File(PathManager.getScreenshotPath(testName));
+	      File screenshotFolder = new File(PathManager.getScreenshotPath(testName)!=null ?PathManager.getScreenshotPath(testName): "Default");
 
 	      File[] allFilesImages = screenshotFolder.listFiles();
 

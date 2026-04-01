@@ -33,7 +33,6 @@ public class PathManager {
     
     
     
-    
     public static String getRunFolder() {
         return runFolderPath;
     }
@@ -47,10 +46,20 @@ public class PathManager {
     }
 
     public static String getLogPath(String testName) {
-        return getRunFolder() + File.separator + "logs" + File.separator + testName;
+    	if(testName!=null) {
+            return getRunFolder() + File.separator + "logs" + File.separator + testName;
+
+    	}else {
+            return getRunFolder() + File.separator + "logs" + File.separator + "Default";
+
+    	}
     }
 
     public static String getScreenshotPath(String testName) {
-        return getRunFolder() + File.separator + "screenshots" + File.separator + testName;
+    	if(testName!=null) {
+            return getRunFolder() + File.separator + "screenshots" + File.separator + testName;
+    	}else {
+            return getRunFolder() + File.separator + "screenshots" + File.separator + "Default";
+    	}
     }
 }
