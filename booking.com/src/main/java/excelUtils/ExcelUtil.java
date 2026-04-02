@@ -56,6 +56,10 @@ public class ExcelUtil {
 			}
 		}
 		
+		public Sheet getSheet() {
+			return sheet;
+		}
+		
 		public String getCellData(int rowNum , int colNum) {
 			try {
 				
