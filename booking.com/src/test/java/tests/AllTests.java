@@ -57,7 +57,7 @@ public class AllTests extends BaseTest {
 	
 	
 	@Test(
-		    dataProvider = "Data"
+		    dataProvider = "MapData"
 		    
 		)
 	public void verifyLoginTest(Map<String ,String> map) throws InterruptedException {
