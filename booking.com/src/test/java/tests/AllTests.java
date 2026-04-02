@@ -1,4 +1,5 @@
 package tests;
+import java.io.File;
 import java.time.Duration; 
 
 import org.apache.logging.log4j.LogManager;
@@ -41,7 +42,10 @@ public class AllTests extends BaseTest {
 		)
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
-		ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
+		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
+				
+		//ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
+		ExcelUtil excel= new ExcelUtil(excelPath);
 		excel.setSheet("Sheet1");
 		System.out.println(		excel.getPhysicalRowCount()+"    ==== EXCELLLLL");
 		System.out.println(		excel.getLastRowNumCount()+"    ==== EXCELLLLL");
