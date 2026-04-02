@@ -1,5 +1,6 @@
 package excelUtils;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -21,21 +22,29 @@ public class ExcelUtil {
 	
 	
 	
-	public ExcelUtil(String filePath){
-		this.filePath=filePath;
-		
-		try {
-			
-			InputStream is=getClass().getClassLoader().getResourceAsStream(filePath);
-			if(is==null) {
-				throw new RuntimeException("File not found: " + filePath);
-			}
-			
-			 workbook = WorkbookFactory.create(is);
-			
-		}catch(Exception  e) {
-			e.printStackTrace();
-		}
+	public ExcelUtil(String filePath) {
+	    this.filePath = filePath;
+
+	    try {
+	        InputStream is = getResourceAsStream(filePath);
+
+	        if (is != null) {
+	            workbook = WorkbookFactory.create(is);
+	        } else {
+	            // fallback to file system
+	            FileInputStream fis = new FileInputStream(filePath);
+	            workbook = WorkbookFactory.create(fis);
+	        }
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Unable to load file: " + filePath, e);
+	    }
+	}
+	
+	private InputStream getResourceAsStream(String path) {
+	    return getClass()
+	            .getClassLoader()
+	            .getResourceAsStream(path);
 	}
 	
 	
