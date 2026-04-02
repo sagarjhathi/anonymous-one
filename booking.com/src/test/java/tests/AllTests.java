@@ -12,6 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import dataProviderUtils.DataProviderUtil;
 import driver.DManager;
 import excelUtils.ExcelUtil;
 import pages.LoginPage;
@@ -36,8 +37,17 @@ public class AllTests extends BaseTest {
 	
 	
 	
+	@DataProvider(name = "Data")
+	public Object[][] Data() {
+		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
+
+		return DataProviderUtil.getDataAsArray(excelPath, "Sheet1");
+	}
+	
+	
+	
 	@Test(
-		    dataProvider = "loginData"
+		    dataProvider = "Data"
 		    
 		)
 	public void verifyLoginTest(String str) throws InterruptedException {
