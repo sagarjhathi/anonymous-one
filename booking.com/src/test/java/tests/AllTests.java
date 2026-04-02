@@ -1,6 +1,8 @@
 package tests;
 import java.io.File;
-import java.time.Duration; 
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,13 +47,22 @@ public class AllTests extends BaseTest {
 	}
 	
 	
+	@DataProvider(name = "MapData")
+	public Object[][] mapData() {
+		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
+
+		return DataProviderUtil.getDataAsMap(excelPath, "Sheet1");
+	}
+	
+	
 	
 	@Test(
-		    dataProvider = "Data"
+		    dataProvider = "MapData"
 		    
 		)
 	public void verifyLoginTest(String str) throws InterruptedException {
 		
+		//System.out.println(map.get("COL 1")+"     reading from the map here");
 		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
 				
 		//ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
