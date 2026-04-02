@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 import driver.DManager;
+import excelUtils.ExcelUtil;
 import pages.LoginPage;
 import utils.SafeActions;
 import utils.ScreenshotUtil;
@@ -38,7 +39,15 @@ public class AllTests extends BaseTest {
 		    dataProvider = "loginData"
 		    
 		)
-	public void verifyLoginTest() throws InterruptedException {
+	public void verifyLoginTest(String str) throws InterruptedException {
+		
+		ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
+		excel.setSheet("Sheet1");
+		System.out.println(		excel.getPhysicalRowCount()+"    ==== EXCELLLLL");
+		System.out.println(		excel.getLastRowNumCount()+"    ==== EXCELLLLL");
+		System.out.println(		excel.getCellData(1, 0)+"    ==== EXCELLLLL");
+		System.out.println(		excel.getLastCellColCount()+"    ==== EXCELLLLL");
+		
 		
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
