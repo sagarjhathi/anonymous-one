@@ -22,8 +22,8 @@ public class DataProviderUtil {
 
         DataFormatter formatter = new DataFormatter();
 
-        int rowCount = sheet.getPhysicalNumberOfRows();
-        int colCount = sheet.getRow(0).getPhysicalNumberOfCells();
+        int rowCount = sheet.getLastRowNum();
+        int colCount = sheet.getRow(0).getLastCellNum();
 
         Object[][] data = new Object[rowCount][colCount];
 
