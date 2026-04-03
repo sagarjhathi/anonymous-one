@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 import dataProviderUtils.DataProviderUtil;
+import database.DbUtility;
 import driver.DManager;
 import excelUtils.ExcelUtil;
 import pages.LoginPage;
@@ -62,6 +63,8 @@ public class AllTests extends BaseTest {
 		)
 	public void verifyLoginTest(Map<String ,String> map) throws InterruptedException {
 		
+	
+		;
 		System.out.println(map.get("COL 1")+"     reading from the map here");
 		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
 				
