@@ -43,6 +43,7 @@ public class TestListener implements ITestListener {
             Attachers.attachAllImageFolders(ThreadContext.get("testName"));
         }
         
+        
     }
 
     @Override

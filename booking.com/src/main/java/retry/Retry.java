@@ -1,6 +1,6 @@
 package retry;
 
-import org.testng.IRetryAnalyzer;
+import org.testng.IRetryAnalyzer; 
 import org.testng.ITestResult;
 
 public class Retry implements IRetryAnalyzer{

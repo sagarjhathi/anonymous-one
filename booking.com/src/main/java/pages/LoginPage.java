@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;  
 
 import base.BasePage;
+import configManager.ConfigManager;
 import utils.SafeActions;
 
 public class LoginPage extends BasePage {
@@ -23,7 +24,9 @@ public class LoginPage extends BasePage {
 	
 	
 	public void openLoginPage() {
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+	//	driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		driver.get(ConfigManager.get("Url"));
+		System.out.println(ConfigManager.get("Url")+"   URL FROM CONFIG HERE");
 	}
 	
 	public String fetchUserNameLoginPage() {
