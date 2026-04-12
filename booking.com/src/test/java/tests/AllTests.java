@@ -66,7 +66,7 @@ public class AllTests extends BaseTest {
 		System.out.println(map.get("COL 1")+"     reading from the map here");
 		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
 				
-		//ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
+	//	ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
 		ExcelUtil excel= new ExcelUtil(excelPath);
 		excel.setSheet("Sheet1");
 		System.out.println(		excel.getPhysicalRowCount()+"    ==== EXCELLLLL");
@@ -99,7 +99,7 @@ public class AllTests extends BaseTest {
 	
 		login.clickingSubmitLoginButton();
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
-
+		excel.close();
 	
 		
 	}
@@ -135,7 +135,7 @@ public class AllTests extends BaseTest {
 
 		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
 		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
-		
+	
 	}
 	
 	
