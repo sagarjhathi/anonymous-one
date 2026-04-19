@@ -1,9 +1,9 @@
 package tests;
-import java.io.File; 
+import java.io.File;  
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
+import io.qameta.allure.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
@@ -56,13 +56,13 @@ public class AllTests extends BaseTest {
 	}
 	
 	
-	
-	@Test(
-		    dataProvider = "MapData"
-		    
-		)
+	@Test(dataProvider = "MapData")
+	@Description("Verify login functionality with different user credentials")
+	@Severity(SeverityLevel.CRITICAL)
+	@Feature("Login Feature")
+	@Story("Valid and Invalid Login Scenarios")
 	public void verifyLoginTest(Map<String ,String> map) throws InterruptedException {
-		;
+		Allure.step("in the test");
 		System.out.println(map.get("COL 1")+"     reading from the map here");
 		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
 				
@@ -73,37 +73,35 @@ public class AllTests extends BaseTest {
 		System.out.println(		excel.getLastRowNumCount()+"    ==== EXCELLLLL");
 		System.out.println(		excel.getCellData(1, 0)+"    ==== EXCELLLLL");
 		System.out.println(		excel.getLastCellColCount()+"    ==== EXCELLLLL");
-		
+		Allure.step("Open login page");
 		
 		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME");
 		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
 
-	//	System.out.println("🔥 CI TEST EXECUTED 🔥   "+str);
-
+		Allure.step("Open login page");
 		LoginPage login=new LoginPage();
 		driver.manage().window().maximize();
-		
 		
 		login.openLoginPage();
 		String userName=login.fetchUserNameLoginPage();
 		String password =login.fetchPasswordLoginPage();
-		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
-
+		//ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		ScreenshotUtil.captureAsBytes(driver);
 	
 		
 		System.out.println(userName+"    "+password);
-		
+		ScreenshotUtil.captureAsBytes(driver);
+
 		login.givingUserNameInput();
 		login.givingPasswordInput();
-		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+	//	ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 	
 		login.clickingSubmitLoginButton();
-		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		//ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 		excel.close();
 	
 		
 	}
-	
 	
 	@Test(
 		    dataProvider = "loginData"

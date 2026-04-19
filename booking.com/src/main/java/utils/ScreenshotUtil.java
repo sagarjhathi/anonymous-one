@@ -4,6 +4,10 @@ import pathManager.PathManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import java.io.ByteArrayInputStream;
+import io.qameta.allure.Allure;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.ThreadContext;
 
 import java.io.File;
@@ -45,6 +49,23 @@ public class ScreenshotUtil {
             System.out.println("Screenshot failed: " + e.getMessage()+ThreadContext.get("testName"));
             return null;
         }
+        
+    }
+    
+    
+    
+    public static void captureAsBytes(WebDriver driver) {
+
+    	  byte[] screenshot = ((TakesScreenshot) driver)
+    	            .getScreenshotAs(OutputType.BYTES);
+
+    	    Allure.addAttachment(
+    	    		ThreadContext.get("testName"),
+    	            "image/png",
+    	            new ByteArrayInputStream(screenshot),
+    	            ".png"
+    	    );
+       
         
     }
 }
