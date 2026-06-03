@@ -43,6 +43,17 @@ jobs:
           Invoke-RestMethod -Uri $env:DISCORD_WEBHOOK -Method Post -Body $body -ContentType 'application/json'
 
 
+      - name: Set RUN_TIMESTAMP (Windows runner)
+        id: set_ts
+        shell: pwsh
+        run: |
+          # produce format yyyy-MM-dd_HH-mm-ss (matches local format)
+          $ts = Get-Date -Format 'yyyy-MM-dd_HH-mm-ss'
+          Write-Host "RUN_TIMESTAMP = $ts"
+          # export to GITHUB_ENV for subsequent steps
+          Add-Content -Path $env:GITHUB_ENV -Value "RUN_TIMESTAMP=$ts"
+
+          
       - name: Build project
         run: mvn clean compile
         working-directory: booking.com
