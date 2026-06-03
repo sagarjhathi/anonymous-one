@@ -53,7 +53,7 @@ jobs:
           # export to GITHUB_ENV for subsequent steps
           Add-Content -Path $env:GITHUB_ENV -Value "RUN_TIMESTAMP=$ts"
 
-          
+
       - name: Build project
         run: mvn clean compile
         working-directory: booking.com
@@ -90,7 +90,7 @@ jobs:
       - name: Upload test artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: anonymous-one-test-result
+          name: run-${{ env.RUN_FOLDER }}_anonymous-test-result
           path: booking.com/${{ env.RUN_FOLDER }}
 
 
