@@ -105,7 +105,6 @@ public class AllTests extends BaseTest {
 	
 	@Test(
 		    dataProvider = "loginData"
-		    
 		)
 	public void sampleTest(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
@@ -256,6 +255,99 @@ public class AllTests extends BaseTest {
 
 	}
 	
+	
+	@Test(
+		    dataProvider = "loginData"
+		    
+		)
+	public void sampleTest3(String str) throws InterruptedException {
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
+		
+		LoginPage login=new LoginPage();		
+		login.openLoginPage();
+		driver.manage().window().maximize();
+		SafeActions safeAct= new SafeActions();
+		String userName=login.fetchUserNameLoginPage();
+		String password =login.fetchPasswordLoginPage();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		
+		System.out.println(userName+"    "+password);
+		
+		login.givingUserNameInput();
+		login.givingPasswordInput();
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		login.clickingSubmitLoginButton();
+		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
+	}
+	
+	
+	@Test(
+		    dataProvider = "loginData"
+		    
+		)
+	public void sampleTest4(String str) throws InterruptedException {
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
+		
+		LoginPage login=new LoginPage();		
+		login.openLoginPage();
+		driver.manage().window().maximize();
+		SafeActions safeAct= new SafeActions();
+		String userName=login.fetchUserNameLoginPage();
+		String password =login.fetchPasswordLoginPage();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		
+		System.out.println(userName+"    "+password);
+		
+		login.givingUserNameInput();
+		login.givingPasswordInput();
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		login.clickingSubmitLoginButton();
+		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
+	}
+	
+	
+	
+	@Test(
+		    dataProvider = "loginData"
+		    
+		)
+	public void sampleTest5(String str) throws InterruptedException {
+		System.out.println("🔥 CI TEST EXECUTED 🔥");
+		
+		LoginPage login=new LoginPage();		
+		login.openLoginPage();
+		driver.manage().window().maximize();
+		SafeActions safeAct= new SafeActions();
+		String userName=login.fetchUserNameLoginPage();
+		String password =login.fetchPasswordLoginPage();
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		
+		System.out.println(userName+"    "+password);
+		
+		login.givingUserNameInput();
+		login.givingPasswordInput();
+		log.info("In the remove driver method under the driver manager", ThreadContext.get("testName"));
+
+		login.clickingSubmitLoginButton();
+		safeAct.safeFindElement(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		safeAct.safeClick(By.xpath("//span[contains(@class,'oxd-main-menu-item--name') and text()='Admin']"));
+		ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
+
+	}
 	
 }
 

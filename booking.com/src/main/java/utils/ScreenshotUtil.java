@@ -1,5 +1,5 @@
 package utils;
-import pathManager.PathManager;
+import pathManager.PathManager; 
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,7 +20,7 @@ public class ScreenshotUtil {
     public static String capture(WebDriver driver, String... names) {
 
         try {
-//
+
         	String testName = ThreadContext.get("testName");
 
         	String screenShotPath = PathManager.getScreenshotPath(testName);
@@ -65,7 +65,5 @@ public class ScreenshotUtil {
     	            new ByteArrayInputStream(screenshot),
     	            ".png"
     	    );
-       
-        
     }
 }
