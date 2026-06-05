@@ -66,7 +66,6 @@ public class AllTests extends BaseTest {
 		System.out.println(map.get("COL 1")+"     reading from the map here");
 		String excelPath= System.getProperty("user.dir")+File.separator+"src"+File.separator+"TestData201.xlsx";
 				
-	//	ExcelUtil excel= new ExcelUtil("TestData101.xlsx");
 		ExcelUtil excel= new ExcelUtil(excelPath);
 		excel.setSheet("Sheet1");
 		System.out.println(		excel.getPhysicalRowCount()+"    ==== EXCELLLLL");
@@ -94,10 +93,8 @@ public class AllTests extends BaseTest {
 
 		login.givingUserNameInput();
 		login.givingPasswordInput();
-	//	ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 	
 		login.clickingSubmitLoginButton();
-		//ScreenshotUtil.capture(driver, "TEST SCREENSHOT NAME", ThreadContext.get("testName"));
 		excel.close();
 	
 		
@@ -326,7 +323,7 @@ public class AllTests extends BaseTest {
 	public void sampleTest5(String str) throws InterruptedException {
 		System.out.println("🔥 CI TEST EXECUTED 🔥");
 		
-		LoginPage login=new LoginPage();		
+		LoginPage login=new LoginPage();			
 		login.openLoginPage();
 		driver.manage().window().maximize();
 		SafeActions safeAct= new SafeActions();
