@@ -94,13 +94,6 @@ jobs:
           path: booking.com/${{ env.RUN_FOLDER }}
 
 
-        # ✅ Save artifacts BEFORE switching branch
-      # - name: Save artifacts
-      #   run: |
-      #     mkdir temp
-      #     Copy-Item -Recurse -Force booking.com/logs temp/
-      #     Copy-Item -Recurse -Force booking.com/screenshots temp/
-      #     Copy-Item -Recurse -Force booking.com/reports temp/
 
       - name: Debug project structure
         run: |
