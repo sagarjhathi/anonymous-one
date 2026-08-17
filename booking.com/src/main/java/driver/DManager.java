@@ -27,20 +27,10 @@ public class DManager{
 		
 		ChromeOptions options =new ChromeOptions();
 		options.addArguments("--start-maximized");
-		//options.addArguments("--headless=new");
 		options.addArguments("--no-sandbox");
 		options.addArguments("--disable-dev-shm-usage");
 		WebDriver driverInstance = new ChromeDriver(options);
-//		WebDriver driverInstance = null;
-//		try {
-//			driverInstance = new RemoteWebDriver(
-//			        URI.create("http://localhost:4444").toURL(),
-//			        options
-//			);
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
 
 	    driver.set(driverInstance);
 	}
