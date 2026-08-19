@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
 	
 	SafeActions safeAct= new SafeActions();
 	
-	By userNameLoginPage=By.xpath("//div[@class='orangehrm-login-error']//p[contains(.,'Username')]");
+	By userNameLoginPage=By.xpath("//div[@class='orangehrm-login-error']/p[contains(.,'Username')]");
 	
 	By passwordLoginPage=By.xpath("//div[@class='orangehrm-login-error']//p[contains(.,'Password')]");
 	
